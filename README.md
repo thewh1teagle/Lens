@@ -27,3 +27,9 @@ Client:
 ```console
 npm run dev
 ```
+
+# Features
+
+- Easy to setup (just 1 binary!)
+- Simple to config (everything inside single JSON file with autocompletion)
+- Built in task scheduler (see `examples/with_tasks.json`)
