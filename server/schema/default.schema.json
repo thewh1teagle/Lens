@@ -1,0 +1,168 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "items": {
+        "type": "array",
+        "items": [
+          {
+            "type": "object",
+            "properties": {
+              "chart_type": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "x": {
+                "type": "object",
+                "properties": {
+                  "format": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "from": {
+                        "type": "string"
+                      },
+                      "to": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "from",
+                      "to"
+                    ]
+                  },
+                  "key": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "format",
+                  "key"
+                ]
+              },
+              "y": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  },
+                  "stroke": {
+                    "type": "string"
+                  },
+                  "fill": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "key",
+                  "stroke",
+                  "fill"
+                ]
+              },
+              "debug": {
+                "type": "boolean"
+              },
+              "refresh_interval": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "chart_type",
+              "url",
+              "x",
+              "y",
+              "debug",
+              "refresh_interval"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "chart_type": {
+                "type": "string"
+              },
+              "query": {
+                "type": "string"
+              },
+              "x": {
+                "type": "object",
+                "properties": {
+                  "format": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "from": {
+                        "type": "string"
+                      },
+                      "to": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "from",
+                      "to"
+                    ]
+                  },
+                  "key": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "format",
+                  "key"
+                ]
+              },
+              "y": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  },
+                  "stroke": {
+                    "type": "string"
+                  },
+                  "fill": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "key",
+                  "stroke",
+                  "fill"
+                ]
+              },
+              "debug": {
+                "type": "boolean"
+              },
+              "refresh_interval": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "chart_type",
+              "query",
+              "x",
+              "y",
+              "debug",
+              "refresh_interval"
+            ]
+          }
+        ]
+      }
+    },
+    "required": [
+      "name",
+      "items"
+    ]
+  }

@@ -13,3 +13,8 @@ export async function fetch(url: string, userAgent?: string): Promise<any> {
     const resp = await axios.get("/api/fetch", {params})
     return resp.data
 }
+
+export async function config(): Promise<DashboardConfig> {
+    const res = await axios.get('/api/config')
+    return res.data
+}

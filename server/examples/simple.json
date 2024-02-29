@@ -1,0 +1,16 @@
+{
+    "$schema": "../schema/default.schema.json",
+    "name": "Dashboard",
+    "items": [
+        {
+            "chart_type": "area",
+            "url": "https://gist.githubusercontent.com/thewh1teagle/096c9e572fbabf571ebeadf3b9b79bec/raw/da3c3db41b82c5be66c5d135176fde8fd272c419/lens.json",
+            "x": {
+                "key": "date"
+            },
+            "y": {
+                "key": "speed"
+            }
+        }
+    ]
+}

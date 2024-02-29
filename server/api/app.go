@@ -4,14 +4,22 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/thewh1teagle/lens/db"
 )
 
-func Setup(api *gin.RouterGroup, db db.DB) {
-	api.GET("/test", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{"hello": "world2!"})
+func Setup(api *gin.RouterGroup, db db.DB, configPath string) {
+
+	api.GET("/config", func(ctx *gin.Context) {
+		dat, err := os.ReadFile(configPath)
+		if err != nil {
+			ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+
+		}
+		ctx.Data(http.StatusOK, "application/json", dat)
 	})
 
 	api.GET("/query", func(ctx *gin.Context) {
