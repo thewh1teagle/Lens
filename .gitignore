@@ -2,3 +2,5 @@ public/
 bin/
 serve
 tmp/
+.DS_Store
+*.db
