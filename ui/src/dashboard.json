@@ -1,0 +1,24 @@
+{
+    "name": "Dashboard",
+    "items": [
+        {
+            "chart_type": "line",
+            "query": "SELECT speed, date FROM speedtest LIMIT 10",
+            "x": {
+                "format": {
+                    "type": "date",
+                    "from": "YYYY-MM-DD HH:mm:ss",
+                    "to": "HH:mm"
+                },
+                "key": "date"
+            },
+            "y": {
+                "key": "speed",
+                "stroke": "#82ca9d",
+                "fill": "#8884d8"
+            },
+            "debug": true,
+            "refresh_interval": "1m"
+        }
+    ]
+}
