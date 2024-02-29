@@ -22,7 +22,7 @@
         },
         {
             "chart_type": "line",
-            "query": "SELECT speed, date FROM speedtest LIMIT 20",
+            "query": "SELECT speed, date FROM speedtest LIMIT 10",
             "x": {
                 "format": {
                     "type": "date",

@@ -38,11 +38,17 @@ func Setup(api *gin.RouterGroup, db db.DB) {
 			return
 		}
 		defer res.Body.Close()
+		status := res.StatusCode
 		// Read response body
 		var responseJson interface{}
 		err = json.NewDecoder(res.Body).Decode(&responseJson)
 		if err != nil {
 			ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+
+		if status != 200 {
+			ctx.JSON(http.StatusInternalServerError, responseJson)
 			return
 		}
 
