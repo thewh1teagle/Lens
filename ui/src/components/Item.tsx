@@ -2,7 +2,8 @@ import { useEffect, useState } from "react"
 import Line from "./Line"
 import * as api from '../api'
 import Area from "./Area"
-
+import * as config from '../config'
+import Invalid from "./Invalid"
 
 
 interface ItemProps {
@@ -35,22 +36,19 @@ export default function Item({props}: ItemProps) {
         loadData()
     }, [])
 
-    if (props.chart_type === 'line') {
-        return (
-            <div className="w-[800px] h-[500px] mt-auto">
-                <Line props={props} data={data} />
-            </div>
-        )
-    }
-    if (props.chart_type === 'area') {
-        return (
-            <div className="w-[800px] h-[500px] mt-auto">
-                <Area props={props} data={data} />
-            </div>
-        )
-    }
+    const width = props.width ?? config.width
+    const height = props.height ?? config.height
+    const SelectedComponent = {
+        "line": Line,
+        "area": Area
+    }?.[props.chart_type] ?? Invalid
     
     return (
-        <h1>Error! invalid props: <code>{JSON.stringify(props)}</code></h1>
+        <div style={{width, height}} className='mt-auto'>
+            <SelectedComponent props={props} data={data} />
+        </div>
     )
+    
+
+
 }
