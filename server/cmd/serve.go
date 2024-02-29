@@ -1,8 +1,6 @@
 package main
 
 import (
-	"database/sql"
-
 	"github.com/alecthomas/kingpin"
 	"github.com/gin-gonic/gin"
 	"github.com/thewh1teagle/lens/api"
@@ -10,11 +8,6 @@ import (
 	"github.com/thewh1teagle/lens/schedule"
 	"github.com/thewh1teagle/lens/ui"
 )
-
-type Animal struct {
-	db   *sql.DB
-	name string
-}
 
 var (
 	dbPath     = kingpin.Arg("db", "Path to db.").Required().String()
