@@ -2,9 +2,6 @@
 
 Your Dashboard platform, your lens to insights.
 
-# Docs
-https://docs.google.com/document/d/17R-Uaq59hsPztzIFcDS0WYCKDNxHrzLTpUnybeypKxY/edit
-
 # Setup
 Server:
 ```console
