@@ -1,6 +1,6 @@
 # Lens
 
-Dashboard platform, your lens to insights.
+Your lens to insights.
 
 # Setup
 ```console
