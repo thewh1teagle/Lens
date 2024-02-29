@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area as RechartsArea } from 'recharts';
-import * as api from '../api'
 
 
 interface LineProps {

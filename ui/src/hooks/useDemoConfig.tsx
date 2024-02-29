@@ -178,7 +178,7 @@ function makeDataFrom(
 ) {
   return [
     ...new Array(series || Math.max(Math.round(Math.random() * 5), 1)),
-  ].map((d, i) => makeSeries(i, dataType, datums, useR));
+  ].map((_, i) => makeSeries(i, dataType, datums, useR));
 }
 
 function makeSeries(

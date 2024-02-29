@@ -1,7 +1,5 @@
-import React, { PureComponent, useEffect, useState } from 'react';
 import { LineChart, Line as ReCharsLine, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import moment from 'moment';
-import * as api from '../api'
 
 
 interface LineProps {

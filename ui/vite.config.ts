@@ -13,7 +13,7 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: '../server/cmd/public',
+    outDir: '../server/ui/public',
     emptyOutDir: true
   }
 })
