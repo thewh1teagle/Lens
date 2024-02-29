@@ -13,13 +13,24 @@ export default function Item({props}: ItemProps) {
 
     useEffect(() => {
         async function loadData() {
-            const query = props.query
-            const res = await api.query(query)
-            if (props.debug) {
-                console.log('config => ', props)
-                console.log(`res => `, res)
+            if (props.query) {
+                const query = props.query
+                const res = await api.query(query)
+                if (props.debug) {
+                    console.log('config => ', props)
+                    console.log(`res => `, res)
+                }
+                setData(res)
+            } else if (props.url) {
+                const url = props.url
+                const res = await api.fetch(url)
+                if (props.debug) {
+                    console.log('config => ', props)
+                    console.log(`res => `, res)
+                }
+                setData(res)
             }
-            setData(res)
+
         }
         loadData()
     }, [])

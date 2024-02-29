@@ -1,6 +1,7 @@
 interface ItemConfig {
     chart_type: string;
     query: string;
+    url: string,
     x: {
         format: {
                 type: string;
