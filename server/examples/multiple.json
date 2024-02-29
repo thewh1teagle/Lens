@@ -1,6 +1,6 @@
 {
     "$schema": "../schema/default.schema.json",
-    "name": "Dashboard",
+    "name": "Speed Dash",
     "items": [
         {
             "chart_type": "area",
