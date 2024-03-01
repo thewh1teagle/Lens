@@ -9,6 +9,13 @@ Your lens to insights.
 
 <img width=1000 src="https://github.com/thewh1teagle/Lens/assets/61390950/6b15792e-dd68-49d9-8f2f-629472e459a3" />
 
+# Variables
+
+Queries can receive the following variables which comes from UI
+
+- `$dt_start` start date
+- `$dt_end` end date
+Can be used as `SELECT * FROM ... WHERE $dt_start ... AND $dt_end ...`
 
 # Features
 

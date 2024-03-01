@@ -25,16 +25,29 @@ export default function Item({ props }: ItemProps) {
   }
 
   const [dateRangeFuncName, setDateRangeFuncName] = useState(props.date_range ?? config.defaultDateFunc)
-  const dateRangeFunc: () => [moment.Moment, moment.Moment] = (config.dateRangesFuncs as any)?.[dateRangeFuncName]
-  const [dateRange, setDateRange] = useState<[moment.Moment, moment.Moment]>(dateRangeFunc())
+  const dateRangeFunc = (config.dateRangesFuncs as any)?.[dateRangeFuncName]
+
+  
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const refreshIntervalRef = useRef<any>();
 
+  
+
   async function loadData() {
     if (props.query) {
-      const query = props.query;
+      let query = props.query;
+      if (dateRangeFunc) {
+        const dateRangeFormat = props.date_range_format ?? config.dateRangeFormat
+        const range  = dateRangeFunc()
+        query = query.replace('$start_date', range[0].format(dateRangeFormat) ?? '')
+        query = query.replace('$end_date', range[1].format(dateRangeFormat) ?? '')
+      }
+      if (props.debug) {
+        console.log('query => ', query)
+      }
+      
       try {
         const res = await api.query(query);
         if (props.debug) {

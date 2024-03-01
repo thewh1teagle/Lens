@@ -23,7 +23,7 @@
         },
         {
             "chart_type": "line",
-            "query": "SELECT speed, date FROM speedtest LIMIT 20",
+            "query": "SELECT speed, date FROM speedtest WHERE date > '$start_date' AND date < '$end_date' LIMIT 20",
             "x": {
                 "format": {
                     "type": "date",

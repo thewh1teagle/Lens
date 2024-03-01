@@ -8,7 +8,6 @@ interface LineProps {
 export default function Area({props, data}: LineProps) {
   const CustomTooltip = ({ active, payload, label }: {active?: boolean, payload?: any, label?: string}) => {
     if (active && payload && payload.length) {
-      console.log('payload => ', payload)
       return (
         <div className="custom-tooltip w-full h-full p-1 text-center" style={{background: payload?.[0].fill, color: payload?.[0].stroke}}>  
           <p className="value">{payload[0].value}</p>

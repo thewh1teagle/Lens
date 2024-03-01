@@ -16,5 +16,6 @@ export const dateRangesFuncs = {
     'Last Week': () => [moment().subtract(1, 'weeks'), moment()],
     'Last Month': () => [moment().subtract(1, 'months'), moment()],
     'Last Year': () => [moment().subtract(1, 'years'), moment()],
+    'Last 10 Years': () => [moment().subtract(10, 'years').startOf('day'), moment()],
     'Today': () => [moment().startOf('day'), moment().endOf('day')],
 };
