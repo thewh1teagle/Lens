@@ -2,7 +2,7 @@ import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, A
 
 
 interface LineProps {
-  props: ItemConfig
+  props: WidgetConfig
   data: any
 }
 export default function Area({props, data}: LineProps) {

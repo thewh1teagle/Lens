@@ -2,74 +2,88 @@ import { useEffect, useRef, useState } from "react";
 import Line from "./Line";
 import * as api from "../api";
 import Area from "./Area";
-import * as config from "../config";
+import * as defaults from "../config";
 import Invalid from "./Invalid";
 import { parseDurationString } from "../date";
 import DateRange from "./DateRange";
 
 interface ItemProps {
-  props: ItemConfig;
+  config: WidgetConfig;
 }
 
-export default function Item({ props }: ItemProps) {
+export default function Item({ config }: ItemProps) {
   // set defaults
-  
-  props.x.fill = props.x?.fill ?? config?.fill;
-  props.y.fill = props.y?.fill ?? config?.fill;
-  props.x.stroke = props.x?.stroke ?? config?.stroke;
-  props.y.stroke = props.y?.stroke ?? config?.stroke;
 
-  if (props?.refresh_interval !== null) {
+  config.x.fill = config.x?.fill ?? defaults?.fill;
+  config.y.fill = config.y?.fill ?? defaults?.fill;
+  config.x.stroke = config.x?.stroke ?? defaults?.stroke;
+  config.y.stroke = config.y?.stroke ?? defaults?.stroke;
+
+  if (config?.refresh_interval !== null) {
     // if explicity set to null, don't refresh
-    props.refresh_interval = props?.refresh_interval ?? config.refreshInterval;
+    config.refresh_interval = config?.refresh_interval ?? defaults.refreshInterval;
   }
 
-  const [dateRangeFuncName, setDateRangeFuncName] = useState(props.date_range ?? config.defaultDateFunc)
-  const dateRangeConfig: typeof config.dateRangesFuncs.today = (config.dateRangesFuncs as any)?.[dateRangeFuncName]
+  const [dateRangeFuncName, setDateRangeFuncName] = useState(
+    config.date_range ?? defaults.defaultDateFunc
+  );
+  const dateRangeConfig: typeof defaults.dateRangesFuncs.today = (
+    defaults.dateRangesFuncs as any
+  )?.[dateRangeFuncName];
 
-  
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const refreshIntervalRef = useRef<any>();
 
-  
-
   async function loadData() {
-    if (props.query) {
-      let query = props.query;
+    if (config.query) {
+      let query = config.query;
       if (dateRangeConfig) {
-        const dateRangeFormat = props.date_range_format ?? config.dateRangeFormat
-        const range  = dateRangeConfig.getValues()
-        query = query.replace('$start_date', range[0].format(dateRangeFormat) ?? '')
-        query = query.replace('$end_date', range[1].format(dateRangeFormat) ?? '')
+        const dateRangeFormat =
+          config.date_range_format ?? defaults.dateRangeFormat;
+        const range = dateRangeConfig.getValues();
+        query = query.replace(
+          "$start_date",
+          range[0].format(dateRangeFormat) ?? ""
+        );
+        query = query.replace(
+          "$end_date",
+          range[1].format(dateRangeFormat) ?? ""
+        );
       }
-      if (props?.debug) {
-        console.log('query => ', query)
+      if (config?.debug) {
+        console.log("query => ", query);
       }
-      
+
       try {
         const res = await api.query(query);
-        if (props?.debug) {
-          console.log("config => ", props);
+        if (config?.debug) {
+          console.log("config => ", config);
           console.log(`res => `, res);
         }
         setData(res);
       } catch (e) {
         setError(JSON.stringify(e));
       }
-    } else if (props.url) {
+    } else if (config.url) {
       try {
-        let startDate, endDate
+        let startDate, endDate;
         if (dateRangeConfig) {
-          const dateRangeFormat = props.date_range_format ?? config.dateRangeFormat
-          const range  = dateRangeConfig.getValues()
-          startDate = range[0].format(dateRangeFormat) ?? ''
-          endDate = range[1].format(dateRangeFormat) ?? ''
+          const dateRangeFormat =
+            config.date_range_format ?? defaults.dateRangeFormat;
+          const range = dateRangeConfig.getValues();
+          startDate = range[0].format(dateRangeFormat) ?? "";
+          endDate = range[1].format(dateRangeFormat) ?? "";
         }
-        const res = await api.fetch({url: props.url, startDate, endDate, userAgent: props.user_agent});
-        if (props?.debug) {
-          console.log("config => ", props);
+        const res = await api.fetch({
+          url: config.url,
+          startDate,
+          endDate,
+          userAgent: config.user_agent,
+        });
+        if (config?.debug) {
+          console.log("config => ", config);
           console.log(`res => `, res);
         }
         setData(res);
@@ -81,16 +95,18 @@ export default function Item({ props }: ItemProps) {
   }
   useEffect(() => {
     loadData();
-    const duration = parseDurationString(props?.refresh_interval ?? config.refreshInterval);
+    const duration = parseDurationString(
+      config?.refresh_interval ?? defaults.refreshInterval
+    );
     if (!duration) {
       console.error(
         "Failed to parse refresh interval => ",
-        props?.refresh_interval
+        config?.refresh_interval
       );
       return;
     }
-    if (props?.debug) {
-      console.log("refresh interval => ", config.refreshInterval);
+    if (config?.debug) {
+      console.log("refresh interval => ", defaults.refreshInterval);
       console.log("as milliseconds => ", duration);
     }
 
@@ -102,17 +118,26 @@ export default function Item({ props }: ItemProps) {
     return () => clearInterval(refreshIntervalRef.current);
   }, [dateRangeFuncName]);
 
-  const width = props.width ?? config.width;
-  const height = props.height ?? config.height;
+  const width = config.width ?? defaults.width;
+  const height = config.height ?? defaults.height;
   const SelectedComponent =
     {
       line: Line,
       area: Area,
-    }?.[props.chart_type] ?? Invalid;
+    }?.[config.chart_type] ?? Invalid;
 
   return (
     <div style={{ width, height }} className="mt-auto">
-      <div className="w-full h-full flex justify-center items-center bg-base-200 rounded-2xl p-3">
+      <div className="w-full h-full flex flex-col justify-center items-center bg-base-200 rounded-2xl p-3 shadow-md">
+        <div className="flex w-full justify-center mb-2">
+          <div className="flex-1">
+            <DateRange
+              rangeFuncName={dateRangeFuncName}
+              setRangeFuncName={setDateRangeFuncName}
+            />
+          </div>
+          <div className="text-xl text-base-content flex-1">{config.title}</div>
+        </div>
         {error && (
           <div className="text-error overflow-auto w-full h-full">{error}</div>
         )}
@@ -120,9 +145,8 @@ export default function Item({ props }: ItemProps) {
           <span className="loading loading-spinner loading-lg text-primary"></span>
         ) : (
           !error && (
-            <div className="w-full h-full flex flex-col gap-2">
-              <DateRange rangeFuncName={dateRangeFuncName} setRangeFuncName={setDateRangeFuncName} />
-              <SelectedComponent props={props} data={data} />
+            <div className="w-full h-full flex flex-col">
+              <SelectedComponent props={config} data={data} />
             </div>
           )
         )}

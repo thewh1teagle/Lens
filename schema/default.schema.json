@@ -34,7 +34,7 @@
             },
             "type": "object"
         },
-        "ItemConfig": {
+        "WidgetConfig": {
             "properties": {
                 "chart_type": {
                     "enum": [
@@ -77,6 +77,9 @@
                     "description": "Interval for refresh eg (1s / 1m / 1h 10d)",
                     "type": "string"
                 },
+                "title": {
+                    "type": "string"
+                },
                 "url": {
                     "description": "URL source (Array of JSON objects)",
                     "type": "string"
@@ -104,11 +107,11 @@
     "properties": {
         "items": {
             "items": {
-                "$ref": "#/definitions/ItemConfig"
+                "$ref": "#/definitions/WidgetConfig"
             },
             "type": "array"
         },
-        "name": {
+        "title": {
             "description": "Name for dashboard (title)",
             "type": "string"
         }

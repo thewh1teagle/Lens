@@ -5,13 +5,13 @@ import ThemeToggle from "../ThemeToggle";
 
 
 export default function Dashboard() {
-  const [config, setConfig] = useState<DashboardConfig>()
+  const [config, setConfig] = useState<LensConfig>()
   const [loading, setLoading] = useState(true)
 
   async function fetchConfig() {
     const config = await api.config()
     setConfig(config)
-    document.title = config.name
+    document.title = config.title
     setLoading(false)
   }
 
@@ -29,10 +29,10 @@ export default function Dashboard() {
   return (
     <div className="p-5 mt-5">
       <ThemeToggle />
-      <div className="text-center text-4xl">{config?.name}</div>
+      <div className="text-center text-4xl">{config?.title}</div>
       <div className="mt-14 flex flex-row flex-wrap gap-5 justify-center">
         {config?.items.map((item) => (
-          <Item key={item.query} props={item} />
+          <Item key={item.query} config={item} />
         ))}
       </div>
     </div>

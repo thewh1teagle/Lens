@@ -23,7 +23,8 @@ interface AxisConfig {
     fill?: string
 }
 
-interface ItemConfig {
+interface WidgetConfig {
+    title: string
     chart_type: "line" | "area"
     /**
     * Left to right axis
@@ -66,10 +67,10 @@ interface ItemConfig {
     user_agent?: string
 }
 
-interface DashboardConfig {
+interface LensConfig {
     /**
     * Name for dashboard (title)
     */
-    name: string
-    items: ItemConfig[]
+    title: string
+    items: WidgetConfig[]
 }

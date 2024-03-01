@@ -3,7 +3,7 @@ import moment from 'moment';
 
 
 interface LineProps {
-  props: ItemConfig
+  props: WidgetConfig
   data: any
 }
 

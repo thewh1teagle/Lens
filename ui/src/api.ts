@@ -24,7 +24,7 @@ export async function fetch({url, ...args}: FetchProps): Promise<any> {
     return resp.data
 }
 
-export async function config(): Promise<DashboardConfig> {
+export async function config(): Promise<LensConfig> {
     const res = await axios.get('/api/config')
     return res.data
 }
