@@ -29,4 +29,5 @@ Can be used as `SELECT * FROM ... WHERE $start_date ... AND $end_date ...`
 
 # Data source
 - `Sqlite` Database
-- any `JSON` `URL`
+- `URL`: any `JSON` `URL`
+- `FS`: any file in filesystem
