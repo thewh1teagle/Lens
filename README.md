@@ -4,7 +4,7 @@ Your lens to insights.
 
 # Setup
 ```console
-./lens local.db simple.json
+./lens simple.json
 ```
 
 <img width=1000 src="https://github.com/thewh1teagle/Lens/assets/61390950/12bc9528-1945-4fbd-a6c3-90cdcef1ddcd" />
@@ -17,7 +17,7 @@ Queries can receive the following variables which comes from UI
 
 - `$start_date` start date
 - `$end_date` end date
-Can be used as `SELECT * FROM ... WHERE $start_date ... AND $end_date ...`
+See [examples](examples)
 
 # Features
 
@@ -29,4 +29,5 @@ Can be used as `SELECT * FROM ... WHERE $start_date ... AND $end_date ...`
 
 # Data source
 - `Sqlite` Database
-- any `JSON` `URL`
+- `URL`: any `JSON` `URL`
+- `FS`: any file in filesystem
