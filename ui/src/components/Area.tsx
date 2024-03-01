@@ -1,5 +1,5 @@
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area as RechartsArea } from 'recharts';
-
+import moment from 'moment-timezone';
 
 interface LineProps {
   config: WidgetConfig
@@ -32,7 +32,16 @@ export default function Area({config, data}: LineProps) {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey={config.x.key} />
+          <XAxis dataKey={config.x.key} tickFormatter={tick => {
+            if (config.x.format?.type === 'date') {
+              if (config?.x?.format?.timezone) {
+                return moment(tick, config.x?.format?.from).tz(config?.x?.format?.timezone).format(config.x?.format?.to)
+              } else {
+                return moment(tick, config.x?.format?.from).local().format(config.x?.format?.to)
+              }
+            }
+            return tick
+          }} />
           <YAxis />
           <Tooltip content={<CustomTooltip />} />
           <RechartsArea type="monotone" dataKey={config.y.key} stroke={config.y?.stroke} fill={config.y?.fill} />

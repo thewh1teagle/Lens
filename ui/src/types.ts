@@ -6,7 +6,8 @@ interface AxisConfig {
             
             type: 'date'
             from: string
-            to: string
+            to: string,
+            timezone?: string
     },
     /**
     * Key to use from data returned

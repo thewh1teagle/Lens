@@ -1,5 +1,5 @@
 import { LineChart, Line as ReCharsLine, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 
 interface LineProps {
@@ -36,7 +36,11 @@ export default function Line({config, data}: LineProps) {
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey={config.x.key} tickFormatter={tick => {
             if (config.x.format?.type === 'date') {
-                return moment(tick, config.x?.format?.from).format(config.x?.format?.to)
+              if (config?.x?.format?.timezone) {
+                return moment(tick, config.x?.format?.from).tz(config?.x?.format?.timezone).format(config.x?.format?.to)
+              } else {
+                return moment(tick, config.x?.format?.from).local().format(config.x?.format?.to)
+              }
             }
             return tick
           }} />
