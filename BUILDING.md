@@ -53,3 +53,12 @@ version="v0.0.4"
 git tag -a $version -m "$version"
 git push origin "$version"
 ```
+
+# Repush with same tag
+```console
+version="v0.0.4"
+git tag -d "$version"
+git push --delete origin "$version"
+git tag -a $version -m "$version"
+git push origin "$version"
+```
