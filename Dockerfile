@@ -1,5 +1,5 @@
-# Build UI
-FROM node:alpine as UI
+# Build UI, no need special platform
+FROM --platform=linux/amd64 node:alpine as UI
 
 RUN mkdir -p /app/server/ui
 COPY ui /app/ui
