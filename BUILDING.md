@@ -62,3 +62,13 @@ git push --delete origin "$version"
 git tag -a $version -m "$version"
 git push origin "$version"
 ```
+
+
+
+# Build docker and push
+
+```console
+docker built -t thewh1teagle/lens .
+docker tag thewh1teagle/lens:latest thewh1teagle/lens:latest
+docker push thewh1teagle/lens:latest
+```
