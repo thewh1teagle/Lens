@@ -17,7 +17,7 @@ Queries can receive the following variables which comes from UI
 
 - `$start_date` start date
 - `$end_date` end date
-Can be used as `SELECT * FROM ... WHERE $start_date ... AND $end_date ...`
+See [examples](examples)
 
 # Features
 
