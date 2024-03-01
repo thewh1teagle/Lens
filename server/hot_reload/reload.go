@@ -1,9 +1,12 @@
 package hotreload
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
+	"os/exec"
+	"runtime"
 	"syscall"
 
 	"github.com/fsnotify/fsnotify"
@@ -37,6 +40,35 @@ func WsPing(ctx *gin.Context) {
 		}
 	}
 }
+func restartSelf() error {
+	// Get the executable path
+	exe, err := os.Executable()
+	if err != nil {
+		return fmt.Errorf("getting executable path: %w", err)
+	}
+	// Use syscall.Exec on Unix-like systems
+	if runtime.GOOS != "windows" {
+		// Replace the current process with a new one
+		err = syscall.Exec(exe, os.Args, os.Environ())
+		if err != nil {
+			return fmt.Errorf("executing new process: %w", err)
+		}
+	} else {
+		// Start a new process on Windows
+		cmd := exec.Command(exe, os.Args...)
+		cmd.Env = os.Environ()
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		cmd.Stdin = os.Stdin
+		err = cmd.Start()
+		if err != nil {
+			return fmt.Errorf("starting new process: %w", err)
+		}
+	}
+	// Exit the current process
+	os.Exit(0)
+	return nil
+}
 
 func SetupWatcher(file string) (chan struct{}, error) {
 	log.Printf("watching %q\n", file)
@@ -50,11 +82,7 @@ func SetupWatcher(file string) (chan struct{}, error) {
 			select {
 			case e := <-w.Events:
 				log.Printf("watcher received: %+v", e)
-				executable, err := os.Executable()
-				if err != nil {
-					log.Fatal(err.Error())
-				}
-				err = syscall.Exec(executable, os.Args, os.Environ())
+				err := restartSelf()
 				if err != nil {
 					log.Fatal(err)
 				}
