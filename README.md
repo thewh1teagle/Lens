@@ -7,7 +7,7 @@ Your lens to insights.
 ./lens local.db simple.json
 ```
 
-<img width=1000 src="https://github.com/thewh1teagle/Lens/assets/61390950/09af85b6-4054-4ade-9c8a-a459679daa62" />
+<img width=1000 src="https://github.com/thewh1teagle/Lens/assets/61390950/12bc9528-1945-4fbd-a6c3-90cdcef1ddcd" />
 
 
 
