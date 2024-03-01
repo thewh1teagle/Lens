@@ -40,6 +40,9 @@ See [examples](examples)
 - `URL`: any `JSON` `URL`
 - `FS`: any file in filesystem
 
+# Showcase
+
+- [SpeedLens](https://github.com/thewh1teagle/SpeedLens) - Speedtest monitor with Lens dashboard
 
 # Docker
 
