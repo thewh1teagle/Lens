@@ -1,0 +1,30 @@
+{
+    "$schema": "../schema/default.schema.json",
+    "title": "Speed Dash",
+    "widgets": [
+        {
+            "id": "speedtest_id",
+            "title": "Speed",
+            "chart_type": "area",
+            "source": {
+                "type": "url",
+                "url": "https://gist.githubusercontent.com/thewh1teagle/096c9e572fbabf571ebeadf3b9b79bec/raw/da3c3db41b82c5be66c5d135176fde8fd272c419/lens.json"
+            },
+            "x": {
+                "key": "date",
+                "stroke": "#82ca9d",
+                "fill": "#8884d8"
+            },
+            "y": {
+                "key": "speed",
+                "stroke": "#82ca9d",
+                "fill": "#8884d8"
+            },
+            "refresh_interval": "1m"
+        }
+    ],
+    "server_config": {
+        "host": "0.0.0.0",
+        "port": 8080
+    }
+}

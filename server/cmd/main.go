@@ -14,8 +14,6 @@ import (
 
 var (
 	configPath = kingpin.Arg("config", "Path to config dashboard JSON.").Required().String()
-	port       = kingpin.Arg("port", "Port for the server").Default("8080").String()
-	host       = kingpin.Arg("host", "Host for the server").Default("127.0.0.1").String()
 )
 
 func main() {
@@ -38,6 +36,20 @@ func main() {
 	// Run hot reloader
 	go hotreload.SetupWatcher(*configPath)
 	// Listen and Server in 0.0.0.0:8080
-	addr := fmt.Sprintf("%s:%s", *host, *port)
+
+	// Get server config
+	port := 8080
+	host := "127.0.0.1"
+	if lensConfig.ServerConfig != nil {
+		serverConfig := lensConfig.ServerConfig
+		if serverConfig.Host != nil {
+			host = *serverConfig.Host
+		}
+		if serverConfig.Port != nil {
+			port = *serverConfig.Port
+		}
+	}
+	addr := fmt.Sprintf("%s:%d", host, port)
+	fmt.Printf("Server running at http://%v\n", addr)
 	r.Run(addr)
 }

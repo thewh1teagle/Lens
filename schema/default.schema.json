@@ -46,6 +46,17 @@
             },
             "type": "object"
         },
+        "ServerConfig": {
+            "properties": {
+                "host": {
+                    "type": "string"
+                },
+                "port": {
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        },
         "SqliteSource": {
             "properties": {
                 "path": {
@@ -174,6 +185,9 @@
         }
     },
     "properties": {
+        "server": {
+            "$ref": "#/definitions/ServerConfig"
+        },
         "tasks": {
             "items": {
                 "$ref": "#/definitions/Task"

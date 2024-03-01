@@ -46,24 +46,25 @@ func restartSelf() error {
 	if err != nil {
 		return fmt.Errorf("getting executable path: %w", err)
 	}
-	// Use syscall.Exec on Unix-like systems
-	if runtime.GOOS != "windows" {
-		// Replace the current process with a new one
-		err = syscall.Exec(exe, os.Args, os.Environ())
-		if err != nil {
-			return fmt.Errorf("executing new process: %w", err)
-		}
-	} else {
+	// Windows being special *again*
+	if runtime.GOOS == "windows" {
 		// Start a new process on Windows
 		cmd := exec.Command(exe, os.Args...)
 		cmd.Env = os.Environ()
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
 		cmd.Stdin = os.Stdin
-		err = cmd.Start()
-		if err != nil {
-			return fmt.Errorf("starting new process: %w", err)
+		err = cmd.Run()
+		if err == nil {
+			os.Exit(0)
+		} else {
+			log.Fatal(err.Error())
 		}
+	}
+	// Replace the current process with a new one
+	err = syscall.Exec(exe, os.Args, os.Environ())
+	if err != nil {
+		return fmt.Errorf("executing new process: %w", err)
 	}
 	// Exit the current process
 	os.Exit(0)
@@ -71,7 +72,6 @@ func restartSelf() error {
 }
 
 func SetupWatcher(file string) (chan struct{}, error) {
-	log.Printf("watching %q\n", file)
 	w, err := fsnotify.NewWatcher()
 	if err != nil {
 		return nil, err
@@ -80,8 +80,8 @@ func SetupWatcher(file string) (chan struct{}, error) {
 	go func() {
 		for {
 			select {
-			case e := <-w.Events:
-				log.Printf("watcher received: %+v", e)
+			case <-w.Events:
+				log.Printf("Detected file change")
 				err := restartSelf()
 				if err != nil {
 					log.Fatal(err)

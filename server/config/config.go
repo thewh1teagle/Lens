@@ -56,10 +56,16 @@ type Task struct {
 	Verbose *bool   `json:"verbose"`
 }
 
+type ServerConfig struct {
+	Port *int    `json:"port"`
+	Host *string `json:"host"`
+}
+
 type LensConfig struct {
-	Title   string         `json:"title"`
-	Widgets []WidgetConfig `json:"widgets"`
-	Tasks   []Task         `json:"tasks"`
+	Title        string         `json:"title"`
+	Widgets      []WidgetConfig `json:"widgets"`
+	Tasks        []Task         `json:"tasks"`
+	ServerConfig *ServerConfig  `json:"server_config"`
 }
 
 func ReadConfig(path string) (*LensConfig, error) {

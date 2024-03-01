@@ -97,6 +97,11 @@ interface Task {
     verbose?: boolean
 }
 
+interface ServerConfig {
+    port?: number
+    host?: string
+}
+
 interface LensConfig {
     /**
     * Name for dashboard (title)
@@ -107,4 +112,5 @@ interface LensConfig {
     */
     widgets: WidgetConfig[]
     tasks: Task[]
+    server?: ServerConfig
 }

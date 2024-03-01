@@ -43,6 +43,9 @@ npm install typescript-json-schema -g
 typescript-json-schema ui/src/types.ts LensConfig > schema/default.schema.json
 ```
 
+# Generate go structs
+https://www.codeconvert.ai/typescript-to-golang-converter
+
 # Release new version
 
 ```console
