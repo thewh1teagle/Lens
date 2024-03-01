@@ -49,9 +49,7 @@ https://www.codeconvert.ai/typescript-to-golang-converter
 # Release new version
 
 ```console
-version="v0.0.3"
-git add .
-git commit -m "Release version $version"
+version="v0.0.4"
 git tag -a $version -m "$version"
 git push origin "$version"
 ```
