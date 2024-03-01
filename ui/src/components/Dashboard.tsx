@@ -30,7 +30,7 @@ export default function Dashboard() {
     <div className="p-5 mt-5">
       <ThemeToggle />
       <div className="text-center text-4xl">{config?.name}</div>
-      <div className="mt-20 flex flex-row flex-wrap gap-5 justify-center">
+      <div className="mt-14 flex flex-row flex-wrap gap-5 justify-center">
         {config?.items.map((item) => (
           <Item key={item.query} props={item} />
         ))}

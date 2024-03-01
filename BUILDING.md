@@ -40,5 +40,5 @@ Just set `GOOS=linux GOARCH=arm` when execute build command
 
 ```console
 npm install typescript-json-schema -g
-typescript-json-schema ui/src/types.ts DashboardConfig > server/schema/default.schema.json
+typescript-json-schema ui/src/types.ts DashboardConfig > schema/default.schema.json
 ```
