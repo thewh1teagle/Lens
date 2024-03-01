@@ -93,3 +93,7 @@ docker buildx build --push \
 --platform linux/amd64,linux/arm64 \
 --tag thewh1teagle/lens:latest .
 ```
+
+### Gotaches
+
+[cannot-build-multi-platform-images-with-docker-buildx](https://stackoverflow.com/questions/60080264/docker-cannot-build-multi-platform-images-with-docker-buildx)
