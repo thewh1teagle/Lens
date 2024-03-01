@@ -86,3 +86,10 @@ docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t thewh1tea
 docker buildx create --name mybuildx --use --driver docker-container
 docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t thewh1teagle/lens . --builder mybuildx
 ```
+
+### One linear
+```console
+docker buildx build --push \
+--platform linux/amd64,linux/arm64 \
+--tag thewh1teagle/lens:latest .
+```
