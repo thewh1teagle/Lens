@@ -25,6 +25,7 @@ Can be used as `SELECT * FROM ... WHERE $start_date ... AND $end_date ...`
 - Simple to config (everything inside single JSON file with autocompletion)
 - Built in task scheduler (see `examples/with_tasks.json`)
 - Custom user agent for `URL` data source
+- Hot reload (Changes in JSON reflected immediately)
 
 # Data source
 - `Sqlite` Database
