@@ -15,9 +15,9 @@ Your lens to insights.
 
 Queries can receive the following variables which comes from UI
 
-- `$dt_start` start date
-- `$dt_end` end date
-Can be used as `SELECT * FROM ... WHERE $dt_start ... AND $dt_end ...`
+- `$start_date` start date
+- `$end_date` end date
+Can be used as `SELECT * FROM ... WHERE $start_date ... AND $end_date ...`
 
 # Features
 
