@@ -10,8 +10,8 @@ axios.interceptors.response.use((response: any) => {
     return Promise.reject(error);
   });
 
-export async function query(query: string): Promise<any> {
-    const resp = await axios.get("/api/query", {params: {q: query}})
+export async function query(query: string, widgetID: string): Promise<any> {
+    const resp = await axios.get("/api/query", {params: {q: query, id: widgetID}})
     return resp.data
 }
 

@@ -1,41 +1,25 @@
 package schedule
 
 import (
-	"encoding/json"
 	"fmt"
 	"os"
 	"os/exec"
 	"strings"
 	"time"
+
+	"github.com/thewh1teagle/lens/config"
 )
 
 // Task represents a task to be executed
 type Task struct {
 	Every    string  `json:"every"`
 	Command  string  `json:"command"`
-	CWD      *string `json:"cwd,omitempty""`
-	Verbose  *bool   `json:"verbose,omitempty""`
+	CWD      *string `json:"cwd,omitempty"`
+	Verbose  *bool   `json:"verbose,omitempty"`
 	LastTime time.Time
 }
 
-func Run(configPath string) {
-	// Open the JSON file
-
-	file, err := os.Open(configPath)
-	if err != nil {
-		fmt.Println("Error opening file:", err)
-		return
-	}
-	defer file.Close()
-
-	// Decode the JSON configuration
-	var config struct {
-		Tasks []Task `json:"tasks"`
-	}
-	if err := json.NewDecoder(file).Decode(&config); err != nil {
-		fmt.Println("Error decoding JSON:", err)
-		return
-	}
+func Run(config config.LensConfig) {
 
 	// Initialize a map to keep track of the last run time of each task
 	lastRunTimes := make(map[int]time.Time)
@@ -52,8 +36,8 @@ func Run(configPath string) {
 				command := commands[0]
 				args := commands[1:]
 				cmd := exec.Command(command, args...)
-				if task.CWD != nil {
-					cmd.Dir = *task.CWD
+				if task.Cwd != nil {
+					cmd.Dir = *task.Cwd
 				}
 
 				if task.Verbose != nil && *task.Verbose {

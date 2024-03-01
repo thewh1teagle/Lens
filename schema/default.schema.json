@@ -34,6 +34,62 @@
             },
             "type": "object"
         },
+        "FSSource": {
+            "properties": {
+                "path": {
+                    "type": "string"
+                },
+                "type": {
+                    "const": "fs",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "SqliteSource": {
+            "properties": {
+                "path": {
+                    "type": "string"
+                },
+                "query": {
+                    "type": "string"
+                },
+                "type": {
+                    "const": "sqlite",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Task": {
+            "properties": {
+                "command": {
+                    "type": "string"
+                },
+                "cwd": {
+                    "type": "string"
+                },
+                "every": {
+                    "type": "string"
+                },
+                "verbose": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "URLSource": {
+            "properties": {
+                "type": {
+                    "const": "url",
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "WidgetConfig": {
             "properties": {
                 "chart_type": {
@@ -70,19 +126,30 @@
                     "description": "Item height (css)",
                     "type": "string"
                 },
-                "query": {
+                "id": {
+                    "description": "Unique ID you want to use",
                     "type": "string"
                 },
                 "refresh_interval": {
                     "description": "Interval for refresh eg (1s / 1m / 1h 10d)",
                     "type": "string"
                 },
+                "source": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/SqliteSource"
+                        },
+                        {
+                            "$ref": "#/definitions/URLSource"
+                        },
+                        {
+                            "$ref": "#/definitions/FSSource"
+                        }
+                    ],
+                    "description": "Source for data"
+                },
                 "title": {
                     "description": "Widget title",
-                    "type": "string"
-                },
-                "url": {
-                    "description": "URL source (Array of JSON objects)",
                     "type": "string"
                 },
                 "user_agent": {
@@ -106,6 +173,12 @@
         }
     },
     "properties": {
+        "tasks": {
+            "items": {
+                "$ref": "#/definitions/Task"
+            },
+            "type": "array"
+        },
         "title": {
             "description": "Name for dashboard (title)",
             "type": "string"

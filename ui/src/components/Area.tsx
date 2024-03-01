@@ -2,10 +2,10 @@ import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, A
 
 
 interface LineProps {
-  props: WidgetConfig
+  config: WidgetConfig
   data: any
 }
-export default function Area({props, data}: LineProps) {
+export default function Area({config, data}: LineProps) {
   const CustomTooltip = ({ active, payload, label }: {active?: boolean, payload?: any, label?: string}) => {
     if (active && payload && payload.length) {
       return (
@@ -32,10 +32,10 @@ export default function Area({props, data}: LineProps) {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey={props.x.key} />
+          <XAxis dataKey={config.x.key} />
           <YAxis />
           <Tooltip content={<CustomTooltip />} />
-          <RechartsArea type="monotone" dataKey={props.y.key} stroke={props.y?.stroke} fill={props.y?.fill} />
+          <RechartsArea type="monotone" dataKey={config.y.key} stroke={config.y?.stroke} fill={config.y?.fill} />
         </AreaChart>
       </ResponsiveContainer>
       </ResponsiveContainer>

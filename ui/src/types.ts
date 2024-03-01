@@ -23,12 +23,37 @@ interface AxisConfig {
     fill?: string
 }
 
+interface SqliteSource {
+    type: 'sqlite'
+    path: string
+    query: string
+}
+
+interface URLSource {
+    type: 'url'
+    url: string
+}
+
+interface FSSource {
+    type: 'fs'
+    path: string
+}
+
 interface WidgetConfig {
+    /**
+    * Unique ID you want to use
+    */
+    id: string
     /**
     * Widget title
     */
     title: string
-    chart_type: "line" | "area"
+    chart_type: "line" | "area" | "table"
+
+    /**
+    * Source for data
+    */
+    source: SqliteSource | URLSource | FSSource
     /**
     * Left to right axis
     */
@@ -37,11 +62,6 @@ interface WidgetConfig {
     * Top to bottom axis
     */
     y: AxisConfig
-    query?: string
-    /**
-    * URL source (Array of JSON objects)
-    */
-    url?: string
     /**
     * Item width (css)
     */
@@ -70,6 +90,13 @@ interface WidgetConfig {
     user_agent?: string
 }
 
+interface Task {
+    every: string
+    command: string
+    cwd?: string
+    verbose?: boolean
+}
+
 interface LensConfig {
     /**
     * Name for dashboard (title)
@@ -79,4 +106,5 @@ interface LensConfig {
     * Widgets
     */
     widgets: WidgetConfig[]
+    tasks: Task[]
 }

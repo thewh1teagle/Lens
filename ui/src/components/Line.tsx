@@ -3,7 +3,7 @@ import moment from 'moment';
 
 
 interface LineProps {
-  props: WidgetConfig
+  config: WidgetConfig
   data: any
 }
 
@@ -20,7 +20,7 @@ const CustomTooltip = ({ active, payload, label }: {active?: boolean, payload?: 
   return null;
 };
 
-export default function Line({props, data}: LineProps) {
+export default function Line({config, data}: LineProps) {
 
     return (
       <ResponsiveContainer width="100%" height="100%">
@@ -34,9 +34,9 @@ export default function Line({props, data}: LineProps) {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" tickFormatter={tick => {
-            if (props.x.format?.type === 'date') {
-                return moment(tick, props.x?.format?.from).format(props.x?.format?.to)
+          <XAxis dataKey={config.x.key} tickFormatter={tick => {
+            if (config.x.format?.type === 'date') {
+                return moment(tick, config.x?.format?.from).format(config.x?.format?.to)
             }
             return tick
           }} />
@@ -44,7 +44,7 @@ export default function Line({props, data}: LineProps) {
           <Tooltip content={<CustomTooltip />} />
           <Legend />
           {/* <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} /> */}
-          <ReCharsLine type="monotone" dataKey={props.y.key} stroke={props.y?.stroke} />
+          <ReCharsLine type="monotone" dataKey={config.y.key} stroke={config.y?.stroke} />
         </LineChart>
       </ResponsiveContainer>
     );

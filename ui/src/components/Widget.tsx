@@ -6,6 +6,7 @@ import * as defaults from "../config";
 import Invalid from "./Invalid";
 import { parseDurationString } from "../date";
 import DateRange from "./DateRange";
+import Table from "./Table";
 
 interface WidgetProps {
   config: WidgetConfig;
@@ -38,12 +39,16 @@ export default function Widget({ config }: WidgetProps) {
   const refreshIntervalRef = useRef<any>();
 
   async function loadData() {
-    if (config.query) {
-      let query = config.query;
+    const source = config.source
+
+    if (config.source.type === 'sqlite') {
+      const sqliteSource = source as SqliteSource
+      let query = sqliteSource.query
       if (dateRangeConfig) {
         const dateRangeFormat =
           config.date_range_format ?? defaults.dateRangeFormat;
         const range = dateRangeConfig.getValues();
+   
         query = query.replace(
           "$start_date",
           range[0].format(dateRangeFormat) ?? ""
@@ -58,7 +63,7 @@ export default function Widget({ config }: WidgetProps) {
       }
 
       try {
-        const res = await api.query(query);
+        const res = await api.query(query, config.id);
         if (config?.debug) {
           console.log("config => ", config);
           console.log(`res => `, res);
@@ -67,7 +72,8 @@ export default function Widget({ config }: WidgetProps) {
       } catch (e) {
         setError(JSON.stringify(e));
       }
-    } else if (config.url) {
+    } else if (config.source.type === 'url') {
+      const source = config.source as URLSource
       try {
         let startDate, endDate;
         if (dateRangeConfig) {
@@ -78,7 +84,7 @@ export default function Widget({ config }: WidgetProps) {
           endDate = range[1].format(dateRangeFormat) ?? "";
         }
         const res = await api.fetch({
-          url: config.url,
+          url: source.url,
           startDate,
           endDate,
           userAgent: config.user_agent,
@@ -119,13 +125,15 @@ export default function Widget({ config }: WidgetProps) {
     return () => clearInterval(refreshIntervalRef.current);
   }, [dateRangeFuncName]);
 
-  const width = config.width ?? defaults.width;
-  const height = config.height ?? defaults.height;
+  const width = config.width || defaults.width;
+  const height = config.height || defaults.height;
   const SelectedComponent =
     {
       line: Line,
       area: Area,
+      table: Table
     }?.[config.chart_type] ?? Invalid;
+
 
   return (
     <div style={{ width, height }} className="mt-auto">
@@ -165,8 +173,8 @@ export default function Widget({ config }: WidgetProps) {
           <span className="loading loading-spinner loading-lg text-primary"></span>
         ) : (
           !error && (
-            <div className="w-full h-full flex flex-col">
-              <SelectedComponent props={config} data={data} />
+            <div className="w-full h-full overflow-auto flex flex-col">
+              <SelectedComponent config={config} data={data} />
             </div>
           )
         )}

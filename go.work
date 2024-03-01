@@ -6,4 +6,5 @@ use (
 	./server/db
 	./server/ui
 	./server/schedule
+	./server/config
 )
