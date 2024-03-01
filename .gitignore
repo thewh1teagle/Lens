@@ -4,3 +4,5 @@ serve
 tmp/
 .DS_Store
 *.db
+dist/
+lens

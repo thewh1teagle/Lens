@@ -15,7 +15,7 @@ npm install
 
 Server:
 ```console
-air --build.cmd "go build -o bin/serve cmd/serve.go" --build.bin "./bin/serve"
+air --build.cmd "go build -o bin/lens cmd/main.go" --build.bin "./bin/lens"
 ```
 
 Client:
@@ -26,7 +26,7 @@ npm run dev
 # Build
 
 ```console
-go build -tags release cmd/serve.go
+go build -o lens -tags release server/cmd/main.go
 ```
 
 ```console
