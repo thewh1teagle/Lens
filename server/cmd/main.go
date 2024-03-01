@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"strconv"
 
 	"github.com/alecthomas/kingpin"
 	"github.com/gin-gonic/gin"
@@ -48,6 +50,19 @@ func main() {
 		if serverConfig.Port != nil {
 			port = *serverConfig.Port
 		}
+	}
+
+	// Read values from environment variables if they're set
+	if envPortStr, exists := os.LookupEnv("LENS_PORT"); exists {
+		envPort, err := strconv.Atoi(envPortStr)
+		if err == nil {
+			port = envPort
+		} else {
+			fmt.Println("Error parsing LENS_PORT:", err)
+		}
+	}
+	if envHost, exists := os.LookupEnv("LENS_HOST"); exists {
+		host = envHost
 	}
 	addr := fmt.Sprintf("%s:%d", host, port)
 	fmt.Printf("Server running at http://%v\n", addr)
