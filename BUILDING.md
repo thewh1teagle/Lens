@@ -64,11 +64,25 @@ git push origin "$version"
 ```
 
 
+# Docker
 
-# Build docker and push
+### Build docker and push
 
 ```console
-docker built -t thewh1teagle/lens .
+docker build -t thewh1teagle/lens .
 docker tag thewh1teagle/lens:latest thewh1teagle/lens:latest
 docker push thewh1teagle/lens:latest
+```
+
+
+### Docker multiplatform
+
+```console
+docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t thewh1teagle/lens .
+```
+
+### In MacOS M1
+```console
+docker buildx create --name mybuildx --use --driver docker-container
+docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t thewh1teagle/lens . --builder mybuildx
 ```
