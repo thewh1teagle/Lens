@@ -46,6 +46,7 @@ typescript-json-schema ui/src/types.ts LensConfig > schema/default.schema.json
 # Release new version
 
 ```console
-git tag -a v0.0.1 -m "v0.0.1"
-git push origin v0.0.1
+version="v0.0.2
+git tag -a $version -m "$version"
+git push origin "$version"
 ```
