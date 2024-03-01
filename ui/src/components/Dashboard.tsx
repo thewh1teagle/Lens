@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Widget from "./Widget";
 import * as api from '../api'
 import ThemeToggle from "../ThemeToggle";
+import { useHotReload } from "../hooks/useHotReload";
 
 
 export default function Dashboard() {
@@ -15,6 +16,8 @@ export default function Dashboard() {
     setLoading(false)
   }
 
+  useHotReload({fetchConfig})
+
   useEffect(() => {
     fetchConfig()
   }, [])
@@ -26,13 +29,15 @@ export default function Dashboard() {
       </div>
     )
   }
+
+
   return (
     <div className="p-5 mt-5">
       <ThemeToggle />
       <div className="text-center text-4xl">{config?.title}</div>
       <div className="mt-14 flex flex-row flex-wrap gap-5 justify-center">
         {config?.widgets.map((item) => (
-          <Widget key={item.query} config={item} />
+          <Widget key={item.id} config={item} />
         ))}
       </div>
     </div>

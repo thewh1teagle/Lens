@@ -95,7 +95,8 @@
                 "chart_type": {
                     "enum": [
                         "area",
-                        "line"
+                        "line",
+                        "table"
                     ],
                     "type": "string"
                 },

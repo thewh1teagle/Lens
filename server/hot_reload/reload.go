@@ -1,12 +1,45 @@
 package hotreload
 
 import (
+	"fmt"
 	"log"
+	"net/http"
 	"os"
 	"syscall"
 
 	"github.com/fsnotify/fsnotify"
+	"github.com/gin-gonic/gin"
+	"github.com/gorilla/websocket"
 )
+
+var upgrader = websocket.Upgrader{} // use default option
+
+func WsPing(ctx *gin.Context) {
+	fmt.Println("got ws req")
+	w, r := ctx.Writer, ctx.Request
+	upgrader.CheckOrigin = func(r *http.Request) bool { return true }
+	c, err := upgrader.Upgrade(w, r, nil)
+	if err != nil {
+		log.Println("upgrade:", err)
+		return
+	}
+	defer c.Close()
+	for {
+		mt, message, err := c.ReadMessage()
+		if err != nil {
+			log.Println("read:", err)
+			break
+		}
+		log.Printf("recv:%s", message)
+		if mt == websocket.TextMessage {
+			c.WriteMessage(websocket.TextMessage, []byte{})
+			if err != nil {
+				log.Println("write:", err)
+				break
+			}
+		}
+	}
+}
 
 func SetupWatcher(file string) (chan struct{}, error) {
 	log.Printf("watching %q\n", file)

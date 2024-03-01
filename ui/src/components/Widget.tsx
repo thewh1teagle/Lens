@@ -14,7 +14,7 @@ interface WidgetProps {
 
 export default function Widget({ config }: WidgetProps) {
   // set defaults
-
+  
   config.x.fill = config.x?.fill ?? defaults?.fill;
   config.y.fill = config.y?.fill ?? defaults?.fill;
   config.x.stroke = config.x?.stroke ?? defaults?.stroke;
@@ -69,6 +69,7 @@ export default function Widget({ config }: WidgetProps) {
           console.log(`res => `, res);
         }
         setData(res);
+        setError('')
       } catch (e) {
         setError(JSON.stringify(e));
       }
@@ -93,6 +94,7 @@ export default function Widget({ config }: WidgetProps) {
           console.log("config => ", config);
           console.log(`res => `, res);
         }
+        setError('')
         setData(res);
       } catch (e) {
         setError(JSON.stringify(e));
@@ -123,7 +125,7 @@ export default function Widget({ config }: WidgetProps) {
     );
 
     return () => clearInterval(refreshIntervalRef.current);
-  }, [dateRangeFuncName]);
+  }, [dateRangeFuncName, config]);
 
   const width = config.width || defaults.width;
   const height = config.height || defaults.height;
@@ -134,7 +136,7 @@ export default function Widget({ config }: WidgetProps) {
       table: Table
     }?.[config.chart_type] ?? Invalid;
 
-
+    
   return (
     <div style={{ width, height }} className="mt-auto">
       <div className="w-full h-full flex flex-col justify-center items-center bg-base-200 rounded-2xl p-3 shadow-md">

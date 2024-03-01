@@ -9,6 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/thewh1teagle/lens/config"
 	"github.com/thewh1teagle/lens/db"
+	hotreload "github.com/thewh1teagle/lens/hot_reload"
 )
 
 func Setup(api *gin.RouterGroup, lensConfig config.LensConfig) {
@@ -72,6 +73,8 @@ func Setup(api *gin.RouterGroup, lensConfig config.LensConfig) {
 		}
 		ctx.Data(http.StatusOK, "application/json", rows)
 	})
+
+	api.GET("/ws", hotreload.WsPing)
 
 	api.GET("/fetch", func(ctx *gin.Context) {
 		url := ctx.Query("url")

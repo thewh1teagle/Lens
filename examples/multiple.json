@@ -4,7 +4,7 @@
     "widgets": [
         {
             "id": "1",
-            "title": "Speed",
+            "title": "Speed1",
             "chart_type": "area",
             "source": {
                 "type": "url",
@@ -29,7 +29,7 @@
         },
         {
             "id": "2",
-            "title": "Speed",
+            "title": "Speed2",
             "chart_type": "line",
             "source": {
                 "type": "sqlite",
@@ -54,7 +54,7 @@
             "date_range": "last_1_year"
         },
         {
-            "id": "cool_table",
+            "id": "cool_table3",
             "title": "Speed",
             "chart_type": "table",
             "source": {
