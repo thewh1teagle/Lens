@@ -6,6 +6,21 @@ interface LineProps {
   props: ItemConfig
   data: any
 }
+
+const CustomTooltip = ({ active, payload, label }: {active?: boolean, payload?: any, label?: string}) => {
+  if (active && payload && payload.length) {
+    console.log('payload => ', payload)
+    return (
+      <div className="custom-tooltip w-full h-full p-1 text-center" style={{background: payload?.[0].fill, color: payload?.[0].stroke}}>  
+        <p className="value">{payload[0].value}</p>
+        <p className="label">{label}</p>
+      </div>
+    );
+  }
+
+  return null;
+};
+
 export default function Line({props, data}: LineProps) {
 
     return (
@@ -27,7 +42,7 @@ export default function Line({props, data}: LineProps) {
             return tick
           }} />
           <YAxis />
-          <Tooltip />
+          <Tooltip content={<CustomTooltip />} />
           <Legend />
           {/* <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} /> */}
           <ReCharsLine type="monotone" dataKey={props.y.key} stroke={props.y.stroke} />

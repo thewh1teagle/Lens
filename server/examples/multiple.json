@@ -23,12 +23,12 @@
         },
         {
             "chart_type": "line",
-            "query": "SELECT speed, date FROM speedtest LIMIT 10",
+            "query": "SELECT speed, date FROM speedtest LIMIT 20",
             "x": {
                 "format": {
                     "type": "date",
                     "from": "YYYY-MM-DD HH:mm:ss",
-                    "to": "HH:mm"
+                    "to": "YYYY-MM-DD HH"
                 },
                 "key": "date"
             },
