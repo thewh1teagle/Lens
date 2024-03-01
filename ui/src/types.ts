@@ -24,6 +24,9 @@ interface AxisConfig {
 }
 
 interface WidgetConfig {
+    /**
+    * Widget title
+    */
     title: string
     chart_type: "line" | "area"
     /**
@@ -40,11 +43,11 @@ interface WidgetConfig {
     */
     url?: string
     /**
-    * Item width
+    * Item width (css)
     */
     width?: string
     /**
-    * Item height
+    * Item height (css)
     */
     height?: string
     debug?: boolean
@@ -72,5 +75,8 @@ interface LensConfig {
     * Name for dashboard (title)
     */
     title: string
-    items: WidgetConfig[]
+    /**
+    * Widgets
+    */
+    widgets: WidgetConfig[]
 }

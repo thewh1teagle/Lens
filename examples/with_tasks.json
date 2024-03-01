@@ -1,7 +1,7 @@
 {
     "$schema": "../schema/default.schema.json",
     "title": "Speed Dash with tasks",
-    "items": [
+    "widgets": [
         {
             "title": "speed",
             "chart_type": "area",

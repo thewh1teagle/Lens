@@ -67,7 +67,7 @@
                     "type": "boolean"
                 },
                 "height": {
-                    "description": "Item height",
+                    "description": "Item height (css)",
                     "type": "string"
                 },
                 "query": {
@@ -78,6 +78,7 @@
                     "type": "string"
                 },
                 "title": {
+                    "description": "Widget title",
                     "type": "string"
                 },
                 "url": {
@@ -89,7 +90,7 @@
                     "type": "string"
                 },
                 "width": {
-                    "description": "Item width",
+                    "description": "Item width (css)",
                     "type": "string"
                 },
                 "x": {
@@ -105,15 +106,16 @@
         }
     },
     "properties": {
-        "items": {
+        "title": {
+            "description": "Name for dashboard (title)",
+            "type": "string"
+        },
+        "widgets": {
+            "description": "Widgets",
             "items": {
                 "$ref": "#/definitions/WidgetConfig"
             },
             "type": "array"
-        },
-        "title": {
-            "description": "Name for dashboard (title)",
-            "type": "string"
         }
     },
     "type": "object"

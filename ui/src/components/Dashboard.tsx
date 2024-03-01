@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Item from "./Item";
+import Widget from "./Widget";
 import * as api from '../api'
 import ThemeToggle from "../ThemeToggle";
 
@@ -31,8 +31,8 @@ export default function Dashboard() {
       <ThemeToggle />
       <div className="text-center text-4xl">{config?.title}</div>
       <div className="mt-14 flex flex-row flex-wrap gap-5 justify-center">
-        {config?.items.map((item) => (
-          <Item key={item.query} config={item} />
+        {config?.widgets.map((item) => (
+          <Widget key={item.query} config={item} />
         ))}
       </div>
     </div>
