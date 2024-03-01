@@ -11,10 +11,15 @@ version: 1
 
 builds:
   - env:
-      - CGO_ENABLED=1
+      - CGO_ENABLED=0
     goos:
       - linux
       - darwin
+      # - windows
+    goarch:
+      - amd64
+      - arm
+      - arm64
     main: ./server/cmd/main.go
     flags:
       - -tags=release
