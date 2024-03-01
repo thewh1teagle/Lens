@@ -25,7 +25,11 @@ func Setup(api *gin.RouterGroup, db db.DB, configPath string) {
 	api.GET("/query", func(ctx *gin.Context) {
 		query := ctx.Query("q")
 
-		rows, _ := db.Query(query)
+		rows, err := db.Query(query)
+		if err != nil {
+			ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
 		ctx.Data(http.StatusOK, "application/json", rows)
 	})
 
@@ -68,7 +72,7 @@ func Setup(api *gin.RouterGroup, db db.DB, configPath string) {
 		}
 
 		if status != 200 {
-			ctx.JSON(http.StatusInternalServerError, responseJson)
+			ctx.JSON(http.StatusInternalServerError, gin.H{"error": responseJson})
 			return
 		}
 

@@ -1,5 +1,15 @@
 import axios from "axios";
 
+axios.interceptors.response.use((response: any) => {
+    return response
+  }, (error) => {
+    // Do something with response error
+    if (error.response.data.error) {
+        return Promise.reject(`API Error: ${error.response.data.error}`);    
+    }
+    return Promise.reject(error);
+  });
+
 export async function query(query: string): Promise<any> {
     const resp = await axios.get("/api/query", {params: {q: query}})
     return resp.data
