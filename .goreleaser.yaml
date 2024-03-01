@@ -36,6 +36,9 @@ archives:
       - goos: windows
         format: zip
 
+    files:
+      - examples/
+      - schema/
 changelog:
   sort: asc
   filters:
