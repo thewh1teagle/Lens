@@ -32,9 +32,25 @@
         "ItemConfig": {
             "properties": {
                 "chart_type": {
+                    "enum": [
+                        "area",
+                        "line"
+                    ],
                     "type": "string"
                 },
                 "date_range": {
+                    "enum": [
+                        "last_10_years",
+                        "last_1_day",
+                        "last_1_hours",
+                        "last_1_minutes",
+                        "last_1_month",
+                        "last_1_week",
+                        "last_1_year",
+                        "last_5_minutes",
+                        "last_6_hours",
+                        "today"
+                    ],
                     "type": "string"
                 },
                 "date_range_format": {
