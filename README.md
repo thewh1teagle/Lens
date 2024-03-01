@@ -4,7 +4,7 @@ Your lens to insights.
 
 # Setup
 ```console
-./lens local.db simple.json
+./lens simple.json
 ```
 
 <img width=1000 src="https://github.com/thewh1teagle/Lens/assets/61390950/12bc9528-1945-4fbd-a6c3-90cdcef1ddcd" />
