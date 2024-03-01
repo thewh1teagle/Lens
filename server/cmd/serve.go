@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/thewh1teagle/lens/api"
 	"github.com/thewh1teagle/lens/config"
+	hotreload "github.com/thewh1teagle/lens/hot_reload"
 	"github.com/thewh1teagle/lens/schedule"
 	"github.com/thewh1teagle/lens/ui"
 )
@@ -34,6 +35,8 @@ func main() {
 	api.Setup(r.Group("/api"), *lensConfig)
 	// Run scheduler in background
 	go schedule.Run(*lensConfig)
+	// Run hot reloader
+	go hotreload.SetupWatcher(*configPath)
 	// Listen and Server in 0.0.0.0:8080
 	addr := fmt.Sprintf("%s:%s", *host, *port)
 	r.Run(addr)

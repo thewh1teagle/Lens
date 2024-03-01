@@ -7,4 +7,5 @@ use (
 	./server/ui
 	./server/schedule
 	./server/config
+	./server/hot_reload
 )
