@@ -1,7 +1,6 @@
 package hotreload
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -15,7 +14,6 @@ import (
 var upgrader = websocket.Upgrader{} // use default option
 
 func WsPing(ctx *gin.Context) {
-	fmt.Println("got ws req")
 	w, r := ctx.Writer, ctx.Request
 	upgrader.CheckOrigin = func(r *http.Request) bool { return true }
 	c, err := upgrader.Upgrade(w, r, nil)
@@ -25,12 +23,11 @@ func WsPing(ctx *gin.Context) {
 	}
 	defer c.Close()
 	for {
-		mt, message, err := c.ReadMessage()
+		mt, _, err := c.ReadMessage()
 		if err != nil {
 			log.Println("read:", err)
 			break
 		}
-		log.Printf("recv:%s", message)
 		if mt == websocket.TextMessage {
 			c.WriteMessage(websocket.TextMessage, []byte{})
 			if err != nil {

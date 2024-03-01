@@ -172,7 +172,9 @@ export default function Widget({ config }: WidgetProps) {
           <div className="text-error overflow-auto w-full h-full">{error}</div>
         )}
         {loading && !error ? (
-          <span className="loading loading-spinner loading-lg text-primary"></span>
+          <div className="w-full h-full flex justify-center items-center">
+            <span className="loading loading-spinner loading-lg text-primary"></span>
+          </div>
         ) : (
           !error && (
             <div className="w-full h-full overflow-auto flex flex-col">

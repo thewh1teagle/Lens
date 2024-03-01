@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
-import useWebSocket, { ReadyState, Options } from "react-use-websocket";
+import { useEffect } from "react";
+import useWebSocket from "react-use-websocket";
 
 export function useHotReload({fetchConfig}: {fetchConfig: () => void}) {
-    const [closed, setClosed] = useState(false)
-  const { sendMessage, lastMessage, readyState } = useWebSocket(
+  const { readyState } = useWebSocket(
     `ws://localhost:8080/api/ws`,
-    {shouldReconnect(event) {
+    {shouldReconnect(_) {
         return true
     },}
   );
