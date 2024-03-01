@@ -22,3 +22,13 @@ Client:
 ```console
 npm run dev
 ```
+
+# Build
+
+```console
+go build -tags release cmd/serve.go
+```
+
+```console
+npm run build
+```
