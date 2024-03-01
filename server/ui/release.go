@@ -14,6 +14,5 @@ import (
 var f embed.FS
 
 func ServeUI(r *gin.Engine) {
-	print("Serving UI with embed fs")
 	r.Use(static.Serve("/", static.EmbedFolder(f, "public")))
 }
