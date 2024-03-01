@@ -2,6 +2,12 @@
 
 Your lens to insights.
 
+# Introduction
+
+Lens is a versatile data exploration and dashboard creation tool that provides rapid insights through an intuitive user interface. With Lens, you can effortlessly generate dynamic dashboards from simple JSON configuration files.
+
+Setup:
+
 # Setup
 
 Download lens from [releases](https://github.com/thewh1teagle/Lens/releases/latest)
