@@ -13,14 +13,15 @@ interface ItemProps {
 
 export default function Item({ props }: ItemProps) {
   // set defaults
-  props.x.fill = props.x.fill ?? config.fill;
-  props.y.fill = props.y.fill ?? config.fill;
-  props.x.stroke = props.x.stroke ?? config.stroke;
-  props.y.stroke = props.y.stroke ?? config.stroke;
+  
+  props.x.fill = props.x?.fill ?? config?.fill;
+  props.y.fill = props.y?.fill ?? config?.fill;
+  props.x.stroke = props.x?.stroke ?? config?.stroke;
+  props.y.stroke = props.y?.stroke ?? config?.stroke;
 
-  if (props.refresh_interval !== null) {
+  if (props?.refresh_interval !== null) {
     // if explicity set to null, don't refresh
-    props.refresh_interval = props.refresh_interval ?? config.refreshInterval;
+    props.refresh_interval = props?.refresh_interval ?? config.refreshInterval;
   }
 
   const [dateRangeFuncName, setDateRangeFuncName] = useState(props.date_range ?? config.defaultDateFunc)
@@ -43,13 +44,13 @@ export default function Item({ props }: ItemProps) {
         query = query.replace('$start_date', range[0].format(dateRangeFormat) ?? '')
         query = query.replace('$end_date', range[1].format(dateRangeFormat) ?? '')
       }
-      if (props.debug) {
+      if (props?.debug) {
         console.log('query => ', query)
       }
       
       try {
         const res = await api.query(query);
-        if (props.debug) {
+        if (props?.debug) {
           console.log("config => ", props);
           console.log(`res => `, res);
         }
@@ -67,7 +68,7 @@ export default function Item({ props }: ItemProps) {
           endDate = range[1].format(dateRangeFormat) ?? ''
         }
         const res = await api.fetch({url: props.url, startDate, endDate, userAgent: props.user_agent});
-        if (props.debug) {
+        if (props?.debug) {
           console.log("config => ", props);
           console.log(`res => `, res);
         }
@@ -80,15 +81,15 @@ export default function Item({ props }: ItemProps) {
   }
   useEffect(() => {
     loadData();
-    const duration = parseDurationString(props.refresh_interval);
+    const duration = parseDurationString(props?.refresh_interval ?? config.refreshInterval);
     if (!duration) {
       console.error(
         "Failed to parse refresh interval => ",
-        props.refresh_interval
+        props?.refresh_interval
       );
       return;
     }
-    if (props.debug) {
+    if (props?.debug) {
       console.log("refresh interval => ", config.refreshInterval);
       console.log("as milliseconds => ", duration);
     }

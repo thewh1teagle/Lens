@@ -35,3 +35,10 @@ npm run build
 
 # Build for Raspberry PI 4
 Just set `GOOS=linux GOARCH=arm` when execute build command
+
+# Generate JSON-schema
+
+```console
+npm install typescript-json-schema -g
+typescript-json-schema ui/src/types.ts DashboardConfig > server/schema/default.schema.json
+```

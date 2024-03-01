@@ -1,168 +1,87 @@
 {
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "type": "object",
-    "properties": {
-      "name": {
-        "type": "string"
-      },
-      "items": {
-        "type": "array",
-        "items": [
-          {
-            "type": "object",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "AxisConfig": {
             "properties": {
-              "chart_type": {
-                "type": "string"
-              },
-              "url": {
-                "type": "string"
-              },
-              "x": {
-                "type": "object",
-                "properties": {
-                  "format": {
-                    "type": "object",
+                "fill": {
+                    "type": "string"
+                },
+                "format": {
                     "properties": {
-                      "type": {
-                        "type": "string"
-                      },
-                      "from": {
-                        "type": "string"
-                      },
-                      "to": {
-                        "type": "string"
-                      }
+                        "from": {
+                            "type": "string"
+                        },
+                        "to": {
+                            "type": "string"
+                        },
+                        "type": {
+                            "type": "string"
+                        }
                     },
-                    "required": [
-                      "type",
-                      "from",
-                      "to"
-                    ]
-                  },
-                  "key": {
-                    "type": "string"
-                  }
+                    "type": "object"
                 },
-                "required": [
-                  "format",
-                  "key"
-                ]
-              },
-              "y": {
-                "type": "object",
-                "properties": {
-                  "key": {
+                "key": {
                     "type": "string"
-                  },
-                  "stroke": {
-                    "type": "string"
-                  },
-                  "fill": {
-                    "type": "string"
-                  }
                 },
-                "required": [
-                  "key",
-                  "stroke",
-                  "fill"
-                ]
-              },
-              "debug": {
-                "type": "boolean"
-              },
-              "refresh_interval": {
-                "type": "string"
-              }
+                "stroke": {
+                    "type": "string"
+                }
             },
-            "required": [
-              "chart_type",
-              "url",
-              "x",
-              "y",
-              "debug",
-              "refresh_interval"
-            ]
-          },
-          {
-            "type": "object",
+            "type": "object"
+        },
+        "ItemConfig": {
             "properties": {
-              "chart_type": {
-                "type": "string"
-              },
-              "query": {
-                "type": "string"
-              },
-              "x": {
-                "type": "object",
-                "properties": {
-                  "format": {
-                    "type": "object",
-                    "properties": {
-                      "type": {
-                        "type": "string"
-                      },
-                      "from": {
-                        "type": "string"
-                      },
-                      "to": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "type",
-                      "from",
-                      "to"
-                    ]
-                  },
-                  "key": {
+                "chart_type": {
                     "type": "string"
-                  }
                 },
-                "required": [
-                  "format",
-                  "key"
-                ]
-              },
-              "y": {
-                "type": "object",
-                "properties": {
-                  "key": {
+                "date_range": {
                     "type": "string"
-                  },
-                  "stroke": {
-                    "type": "string"
-                  },
-                  "fill": {
-                    "type": "string"
-                  }
                 },
-                "required": [
-                  "key",
-                  "stroke",
-                  "fill"
-                ]
-              },
-              "debug": {
-                "type": "boolean"
-              },
-              "refresh_interval": {
-                "type": "string"
-              }
+                "date_range_format": {
+                    "type": "string"
+                },
+                "debug": {
+                    "type": "boolean"
+                },
+                "height": {
+                    "type": "string"
+                },
+                "query": {
+                    "type": "string"
+                },
+                "refresh_interval": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "user_agent": {
+                    "type": "string"
+                },
+                "width": {
+                    "type": "string"
+                },
+                "x": {
+                    "$ref": "#/definitions/AxisConfig"
+                },
+                "y": {
+                    "$ref": "#/definitions/AxisConfig"
+                }
             },
-            "required": [
-              "chart_type",
-              "query",
-              "x",
-              "y",
-              "debug",
-              "refresh_interval"
-            ]
-          }
-        ]
-      }
+            "type": "object"
+        }
     },
-    "required": [
-      "name",
-      "items"
-    ]
-  }
+    "properties": {
+        "items": {
+            "items": {
+                "$ref": "#/definitions/ItemConfig"
+            },
+            "type": "array"
+        },
+        "name": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+}
+
