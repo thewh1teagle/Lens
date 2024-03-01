@@ -4,9 +4,11 @@
         "AxisConfig": {
             "properties": {
                 "fill": {
+                    "description": "Bg color",
                     "type": "string"
                 },
                 "format": {
+                    "description": "Custom format for fields, supported currenly is date with moment format (from / to)",
                     "properties": {
                         "from": {
                             "type": "string"
@@ -15,15 +17,18 @@
                             "type": "string"
                         },
                         "type": {
+                            "const": "date",
                             "type": "string"
                         }
                     },
                     "type": "object"
                 },
                 "key": {
+                    "description": "Key to use from data returned",
                     "type": "string"
                 },
                 "stroke": {
+                    "description": "Text / line colors",
                     "type": "string"
                 }
             },
@@ -39,6 +44,7 @@
                     "type": "string"
                 },
                 "date_range": {
+                    "description": "Default date range filter in UI",
                     "enum": [
                         "last_10_years",
                         "last_1_day",
@@ -54,34 +60,42 @@
                     "type": "string"
                 },
                 "date_range_format": {
+                    "description": "Date range format to send to DB Query / URL",
                     "type": "string"
                 },
                 "debug": {
                     "type": "boolean"
                 },
                 "height": {
+                    "description": "Item height",
                     "type": "string"
                 },
                 "query": {
                     "type": "string"
                 },
                 "refresh_interval": {
+                    "description": "Interval for refresh eg (1s / 1m / 1h 10d)",
                     "type": "string"
                 },
                 "url": {
+                    "description": "URL source (Array of JSON objects)",
                     "type": "string"
                 },
                 "user_agent": {
+                    "description": "Custom user agent for URL source",
                     "type": "string"
                 },
                 "width": {
+                    "description": "Item width",
                     "type": "string"
                 },
                 "x": {
-                    "$ref": "#/definitions/AxisConfig"
+                    "$ref": "#/definitions/AxisConfig",
+                    "description": "Left to right axis"
                 },
                 "y": {
-                    "$ref": "#/definitions/AxisConfig"
+                    "$ref": "#/definitions/AxisConfig",
+                    "description": "Top to bottom axis"
                 }
             },
             "type": "object"
@@ -95,6 +109,7 @@
             "type": "array"
         },
         "name": {
+            "description": "Name for dashboard (title)",
             "type": "string"
         }
     },
