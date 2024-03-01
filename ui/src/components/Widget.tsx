@@ -23,7 +23,7 @@ export default function Widget({ config }: WidgetProps) {
   if (config?.refresh_interval !== null) {
     // if explicity set to null, don't refresh
     config.refresh_interval =
-      config?.refresh_interval ?? defaults.refreshInterval;
+      config?.refresh_interval || defaults.refreshInterval;
   }
 
   const [dateRangeFuncName, setDateRangeFuncName] = useState(
