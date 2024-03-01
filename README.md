@@ -39,3 +39,22 @@ See [examples](examples)
 - `Sqlite` Database
 - `URL`: any `JSON` `URL`
 - `FS`: any file in filesystem
+
+
+# Docker
+
+You only need to mount the `JSON` file and run it.
+
+```yaml
+services:
+  lens:
+    image: thewh1teagle/lens
+    command: /lens examples/simple.json
+    volumes:
+      - ./examples/:/examples
+    ports:
+      - 0.0.0.0:8080:8080
+    environment:
+      - LENS_HOST=0.0.0.0
+      - LENS_PORT=8080
+```
