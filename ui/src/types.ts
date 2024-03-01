@@ -19,6 +19,8 @@ interface ItemConfig {
     height: string
     debug: boolean;
     refresh_interval: string;
+    date_range_format?: string
+    date_range?: string
 }
 
 interface DashboardConfig {

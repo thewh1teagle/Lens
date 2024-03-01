@@ -5,6 +5,9 @@ import Area from "./Area";
 import * as config from "../config";
 import Invalid from "./Invalid";
 import { parseDurationString } from "../date";
+import DateRange from "./DateRange";
+import moment from "moment";
+
 interface ItemProps {
   props: ItemConfig;
 }
@@ -21,6 +24,9 @@ export default function Item({ props }: ItemProps) {
     props.refresh_interval = props.refresh_interval ?? config.refreshInterval;
   }
 
+  const [dateRangeFuncName, setDateRangeFuncName] = useState(props.date_range ?? config.defaultDateFunc)
+  const dateRangeFunc: () => [moment.Moment, moment.Moment] = (config.dateRangesFuncs as any)?.[dateRangeFuncName]
+  const [dateRange, setDateRange] = useState<[moment.Moment, moment.Moment]>(dateRangeFunc())
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
@@ -75,7 +81,7 @@ export default function Item({ props }: ItemProps) {
     );
 
     return () => clearInterval(refreshIntervalRef.current);
-  }, []);
+  }, [dateRangeFuncName]);
 
   const width = props.width ?? config.width;
   const height = props.height ?? config.height;
@@ -94,7 +100,12 @@ export default function Item({ props }: ItemProps) {
         {loading && !error ? (
           <span className="loading loading-spinner loading-lg text-primary"></span>
         ) : (
-          !error && <SelectedComponent props={props} data={data} />
+          !error && (
+            <div className="w-full h-full flex flex-col gap-2">
+              <DateRange rangeFuncName={dateRangeFuncName} setRangeFuncName={setDateRangeFuncName} />
+              <SelectedComponent props={props} data={data} />
+            </div>
+          )
         )}
       </div>
     </div>
