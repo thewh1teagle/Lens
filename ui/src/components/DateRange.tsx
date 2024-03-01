@@ -1,8 +1,9 @@
+import { SetStateAction } from "react";
 import * as config from "../config";
 
 
 interface DateRangeProps {
-  setRangeFuncName: (name: string) => void
+  setRangeFuncName: React.Dispatch<SetStateAction<any>>
   rangeFuncName: string
 }
 
