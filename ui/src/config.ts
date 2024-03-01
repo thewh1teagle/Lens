@@ -7,7 +7,7 @@ export const stroke = '#82ca9d'
 export const refreshInterval = '1m'
 export const dateRangeFormat = 'YYYY-MM-DDTHH:mm:ss'
 export const defaultDateFunc = 'today'
-
+export const wsURL = import.meta.env.DEV ? 'ws://localhost:8080/api/ws' : 'ws:///api/ws'
 export const dateRangesFuncs = {
     "last_1_minutes": {
         label: "Last Minute",
