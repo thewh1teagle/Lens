@@ -42,3 +42,10 @@ Just set `GOOS=linux GOARCH=arm` when execute build command
 npm install typescript-json-schema -g
 typescript-json-schema ui/src/types.ts LensConfig > schema/default.schema.json
 ```
+
+# Release new version
+
+```console
+git tag -a v0.0.1 -m "v0.0.1"
+git push origin v0.0.1
+```
