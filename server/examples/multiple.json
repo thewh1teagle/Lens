@@ -5,6 +5,7 @@
         {
             "chart_type": "area",
             "url": "https://gist.githubusercontent.com/thewh1teagle/096c9e572fbabf571ebeadf3b9b79bec/raw/da3c3db41b82c5be66c5d135176fde8fd272c419/lens.json",
+            "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
             "x": {
                 "format": {
                     "type": "date",
@@ -38,7 +39,8 @@
                 "fill": "#8884d8"
             },
             "debug": true,
-            "refresh_interval": "1m"
+            "refresh_interval": "1m",
+            "date_range": "last_1_year"
         }
     ]
 }

@@ -31,6 +31,9 @@ func Setup(api *gin.RouterGroup, db db.DB, configPath string) {
 
 	api.GET("/fetch", func(ctx *gin.Context) {
 		url := ctx.Query("url")
+		startDate := ctx.Query("start_date")
+		endDate := ctx.Query("end_date")
+
 		fmt.Printf("url is %v\n", url)
 		userAgent := ctx.DefaultQuery("user_agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
 		client := &http.Client{}
@@ -40,6 +43,15 @@ func Setup(api *gin.RouterGroup, db db.DB, configPath string) {
 			return
 		}
 		req.Header.Set("User-Agent", userAgent)
+
+		// If start_date and end_date are not empty, add them to the query parameters of the URL
+		if startDate != "" && endDate != "" {
+			query := req.URL.Query()
+			query.Add("start_date", startDate)
+			query.Add("end_date", endDate)
+			req.URL.RawQuery = query.Encode()
+		}
+
 		res, err := client.Do(req)
 		if err != nil {
 			ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})

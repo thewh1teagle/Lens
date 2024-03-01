@@ -21,6 +21,7 @@ interface ItemConfig {
     refresh_interval: string;
     date_range_format?: string
     date_range?: string
+    user_agent?: string
 }
 
 interface DashboardConfig {

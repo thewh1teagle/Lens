@@ -6,7 +6,6 @@ import * as config from "../config";
 import Invalid from "./Invalid";
 import { parseDurationString } from "../date";
 import DateRange from "./DateRange";
-import moment from "moment";
 
 interface ItemProps {
   props: ItemConfig;
@@ -25,7 +24,7 @@ export default function Item({ props }: ItemProps) {
   }
 
   const [dateRangeFuncName, setDateRangeFuncName] = useState(props.date_range ?? config.defaultDateFunc)
-  const dateRangeFunc = (config.dateRangesFuncs as any)?.[dateRangeFuncName]
+  const dateRangeConfig: typeof config.dateRangesFuncs.today = (config.dateRangesFuncs as any)?.[dateRangeFuncName]
 
   
   const [data, setData] = useState([]);
@@ -38,9 +37,9 @@ export default function Item({ props }: ItemProps) {
   async function loadData() {
     if (props.query) {
       let query = props.query;
-      if (dateRangeFunc) {
+      if (dateRangeConfig) {
         const dateRangeFormat = props.date_range_format ?? config.dateRangeFormat
-        const range  = dateRangeFunc()
+        const range  = dateRangeConfig.getValues()
         query = query.replace('$start_date', range[0].format(dateRangeFormat) ?? '')
         query = query.replace('$end_date', range[1].format(dateRangeFormat) ?? '')
       }
@@ -59,9 +58,15 @@ export default function Item({ props }: ItemProps) {
         setError(JSON.stringify(e));
       }
     } else if (props.url) {
-      const url = props.url;
       try {
-        const res = await api.fetch(url);
+        let startDate, endDate
+        if (dateRangeConfig) {
+          const dateRangeFormat = props.date_range_format ?? config.dateRangeFormat
+          const range  = dateRangeConfig.getValues()
+          startDate = range[0].format(dateRangeFormat) ?? ''
+          endDate = range[1].format(dateRangeFormat) ?? ''
+        }
+        const res = await api.fetch({url: props.url, startDate, endDate, userAgent: props.user_agent});
         if (props.debug) {
           console.log("config => ", props);
           console.log(`res => `, res);

@@ -6,16 +6,47 @@ export const fill = '#8884d8'
 export const stroke = '#82ca9d'
 export const refreshInterval = '1m'
 export const dateRangeFormat = 'YYYY-MM-DDTHH:mm:ss'
-export const defaultDateFunc = 'Today'
+export const defaultDateFunc = 'today'
 
-
-type DateRangeObject = { [key: string]: () => [moment.Moment, moment.Moment] };
 export const dateRangesFuncs = {
-    "Last 6 Hours": () => [moment().subtract(6, 'hours'), moment()],
-    'Last Day': () => [moment().subtract(1, 'days'), moment()],
-    'Last Week': () => [moment().subtract(1, 'weeks'), moment()],
-    'Last Month': () => [moment().subtract(1, 'months'), moment()],
-    'Last Year': () => [moment().subtract(1, 'years'), moment()],
-    'Last 10 Years': () => [moment().subtract(10, 'years').startOf('day'), moment()],
-    'Today': () => [moment().startOf('day'), moment().endOf('day')],
+    "last_1_minutes": {
+        label: "Last Minute",
+        getValues: () => [moment().subtract(6, 'hours'), moment()]
+    },
+    "last_5_minutes": {
+        label: "Last 5 Minute",
+        getValues: () => [moment().subtract(6, 'hours'), moment()]
+    },
+    "last_1_hours": {
+        label: "Last Hour",
+        getValues: () => [moment().subtract(6, 'hours'), moment()]
+    },
+    "last_6_hours": {
+        label: "Last 6 Hours",
+        getValues: () => [moment().subtract(6, 'hours'), moment()]
+    },
+    "last_1_day": {
+        label: "Last Day",
+        getValues: () => [moment().subtract(1, 'days'), moment()]
+    },
+    "last_1_week": {
+        label: "Last Week",
+        getValues: () => [moment().subtract(1, 'weeks'), moment()]
+    },
+    "last_1_month": {
+        label: "Last Month",
+        getValues: () => [moment().subtract(1, 'months'), moment()]
+    },
+    "last_1_year": {
+        label: "Last Year",
+        getValues: () => [moment().subtract(1, 'years'), moment()]
+    },
+    "last_10_years": {
+        label: "Last 10 Years",
+        getValues: () => [moment().subtract(10, 'years').startOf('day'), moment()]
+    },
+    "today": {
+        label: "Today",
+        getValues: () => [moment().startOf('day'), moment().endOf('day')]
+    }
 };
