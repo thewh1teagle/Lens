@@ -32,3 +32,6 @@ go build -tags release cmd/serve.go
 ```console
 npm run build
 ```
+
+# Build for Raspberry PI 4
+Just set `GOOS=linux GOARCH=arm` when execute build command
