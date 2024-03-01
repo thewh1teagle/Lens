@@ -23,7 +23,7 @@ func New(path string) (*SqliteDB, error) {
 
 func (s *SqliteDB) Connect() error {
 	// Open the SQLite database connection
-	db, err := sql.Open("sqlite3", s.path)
+	db, err := sql.Open("sqlite", s.path)
 	if err != nil {
 		panic(err)
 	}
