@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev:ui": "vite",
-    "dev:be": "cd .. && nodemon --signal SIGTERM --exec go run server/cmd/main.go examples/simple.json",
+    "dev:be": "cd .. && nodemon --signal SIGTERM --exec go run server/cmd/main.go examples/sqlite.json",
     "dev": "concurrently \"npm:dev:be\" \"npm:dev:ui\"",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",

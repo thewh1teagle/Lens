@@ -1,0 +1,33 @@
+{
+    "$schema": "../schema/default.schema.json",
+    "title": "Speed Dash",
+    "widgets": [
+        {
+            "id": "2",
+            "title": "Speed2",
+            "chart_type": "line",
+            "source": {
+                "type": "sqlite",
+                "query": "SELECT speed, date FROM speedtest WHERE date > datetime('now', '-1 hour') ORDER BY date",
+                "path": "app.db"
+            },
+            "x": {
+                "format": {
+                    "type": "date",
+                    "from": "YYYY-MM-DD HH:mm:ss",
+                    "to": "HH:mm",
+                    "timezone": "Asia/Jerusalem"
+                },
+                "key": "date"
+            },
+            "y": {
+                "key": "speed",
+                "stroke": "#82ca9d",
+                "fill": "#8884d8"
+            },
+            "debug": true,
+            "refresh_interval": "1m",
+            "date_range": "last_1_year"
+        }
+    ]
+}
