@@ -16,6 +16,7 @@ import (
 
 var (
 	configPath = kingpin.Arg("config", "Path to config dashboard JSON.").Required().String()
+	version    = "0.0.6"
 )
 
 func main() {
@@ -28,6 +29,7 @@ func main() {
 
 	// Setup API
 	lensConfig, err := config.ReadConfig(*configPath)
+	lensConfig.Version = &version // insert current version
 
 	if err != nil {
 		panic(err.Error())
