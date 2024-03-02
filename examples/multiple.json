@@ -39,7 +39,6 @@
             "x": {
                 "format": {
                     "type": "date",
-                    "from": "YYYY-MM-DD HH:mm:ss",
                     "to": "YYYY-MM-DD HH",
                     "timezone": "local"
                 },
@@ -66,7 +65,6 @@
             "x": {
                 "format": {
                     "type": "date",
-                    "from": "YYYY-MM-DD HH:mm:ss",
                     "to": "YYYY-MM-DD HH"
                 },
                 "key": "date"

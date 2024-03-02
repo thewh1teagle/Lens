@@ -41,12 +41,12 @@ def random_speed():
 
 
 virtual_date = datetime.utcnow() - timedelta(days=30)
+interval = timedelta(minutes=30)
 while virtual_date < datetime.utcnow():
     speed = random_speed()
     print(f'Inserting date {virtual_date} with speed {speed}')
     insert_data(speed, virtual_date)
-    virtual_date += timedelta(minutes=30)
-    # time.sleep(1)
+    virtual_date += interval
 
 conn.commit()
 conn.close()

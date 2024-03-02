@@ -15,10 +15,10 @@ interface WidgetProps {
 export default function Widget({ config }: WidgetProps) {
   // set defaults
   
-  config.x.fill = config.x?.fill ?? defaults?.fill;
-  config.y.fill = config.y?.fill ?? defaults?.fill;
-  config.x.stroke = config.x?.stroke ?? defaults?.stroke;
-  config.y.stroke = config.y?.stroke ?? defaults?.stroke;
+  config.x.fill = config.x?.fill || defaults?.fill;
+  config.y.fill = config.y?.fill || defaults?.fill;
+  config.x.stroke = config.x?.stroke || defaults?.stroke;
+  config.y.stroke = config.y?.stroke || defaults?.stroke;
 
   if (config?.refresh_interval !== null) {
     // if explicity set to null, don't refresh
@@ -27,7 +27,7 @@ export default function Widget({ config }: WidgetProps) {
   }
 
   const [dateRangeFuncName, setDateRangeFuncName] = useState(
-    config.date_range ?? defaults.defaultDateFunc
+    config.date_range || defaults.defaultDateFunc
   );
   const dateRangeConfig: typeof defaults.dateRangesFuncs.today = (
     defaults.dateRangesFuncs as any
@@ -46,16 +46,16 @@ export default function Widget({ config }: WidgetProps) {
       let query = sqliteSource.query
       if (dateRangeConfig) {
         const dateRangeFormat =
-          config.date_range_format ?? defaults.dateRangeFormat;
+          config.date_range_format || defaults.dateRangeFormat;
         const range = dateRangeConfig.getValues();
    
         query = query.replace(
           "$start_date",
-          range[0].format(dateRangeFormat) ?? ""
+          range[0].format(dateRangeFormat) || ""
         );
         query = query.replace(
           "$end_date",
-          range[1].format(dateRangeFormat) ?? ""
+          range[1].format(dateRangeFormat) || ""
         );
       }
       if (config?.debug) {
@@ -79,10 +79,10 @@ export default function Widget({ config }: WidgetProps) {
         let startDate, endDate;
         if (dateRangeConfig) {
           const dateRangeFormat =
-            config.date_range_format ?? defaults.dateRangeFormat;
+            config.date_range_format || defaults.dateRangeFormat;
           const range = dateRangeConfig.getValues();
-          startDate = range[0].format(dateRangeFormat) ?? "";
-          endDate = range[1].format(dateRangeFormat) ?? "";
+          startDate = range[0].format(dateRangeFormat) || "";
+          endDate = range[1].format(dateRangeFormat) || "";
         }
         const res = await api.fetch({
           url: source.url,
@@ -105,7 +105,7 @@ export default function Widget({ config }: WidgetProps) {
   useEffect(() => {
     loadData();
     const duration = parseDurationString(
-      config?.refresh_interval ?? defaults.refreshInterval
+      config?.refresh_interval || defaults.refreshInterval
     );
     if (!duration) {
       console.error(
@@ -134,7 +134,7 @@ export default function Widget({ config }: WidgetProps) {
       line: Line,
       area: Area,
       table: Table
-    }?.[config.chart_type] ?? Invalid;
+    }?.[config.chart_type] || Invalid;
 
     
   return (

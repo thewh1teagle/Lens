@@ -11,42 +11,42 @@ export const wsURL = import.meta.env.DEV ? 'ws://localhost:8080/api/ws' : 'ws://
 export const dateRangesFuncs = {
     "last_1_minutes": {
         label: "Last Minute",
-        getValues: () => [moment().subtract(6, 'hours'), moment()]
+        getValues: () => [moment().utc().subtract(1, 'minutes'), moment().utc()]
     },
     "last_5_minutes": {
         label: "Last 5 Minute",
-        getValues: () => [moment().subtract(6, 'hours'), moment()]
+        getValues: () => [moment().utc().subtract(5, 'minutes'), moment().utc()]
     },
     "last_1_hours": {
         label: "Last Hour",
-        getValues: () => [moment().subtract(6, 'hours'), moment()]
+        getValues: () => [moment().utc().subtract(1, 'hours'), moment().utc()]
     },
     "last_6_hours": {
         label: "Last 6 Hours",
-        getValues: () => [moment().subtract(6, 'hours'), moment()]
+        getValues: () => [moment().utc().subtract(6, 'hours'), moment().utc()]
     },
     "last_1_day": {
         label: "Last Day",
-        getValues: () => [moment().subtract(1, 'days'), moment()]
+        getValues: () => [moment().utc().subtract(1, 'days'), moment().utc()]
     },
     "last_1_week": {
         label: "Last Week",
-        getValues: () => [moment().subtract(1, 'weeks'), moment()]
+        getValues: () => [moment().utc().subtract(1, 'weeks'), moment().utc()]
     },
     "last_1_month": {
         label: "Last Month",
-        getValues: () => [moment().subtract(1, 'months'), moment()]
+        getValues: () => [moment().utc().subtract(1, 'months'), moment().utc()]
     },
     "last_1_year": {
         label: "Last Year",
-        getValues: () => [moment().subtract(1, 'years'), moment()]
+        getValues: () => [moment().utc().subtract(1, 'years'), moment().utc()]
     },
     "last_10_years": {
         label: "Last 10 Years",
-        getValues: () => [moment().subtract(10, 'years').startOf('day'), moment()]
+        getValues: () => [moment().utc().subtract(10, 'years').startOf('day'), moment().utc()]
     },
     "today": {
         label: "Today",
-        getValues: () => [moment().startOf('day'), moment().endOf('day')]
+        getValues: () => [moment().utc().startOf('day'), moment().utc().endOf('day')]
     }
 };
