@@ -3,7 +3,6 @@ interface AxisConfig {
     * Custom format for fields, supported currenly is date with moment format (from / to)
     */
     format?: {
-            
             type: 'date'
             from: string
             to: string,

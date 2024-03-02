@@ -66,7 +66,7 @@ type LensConfig struct {
 	Title        string         `json:"title"`
 	Widgets      []WidgetConfig `json:"widgets"`
 	Tasks        []Task         `json:"tasks"`
-	ServerConfig *ServerConfig  `json:"server_config"`
+	ServerConfig *ServerConfig  `json:"server"`
 }
 
 func ReadConfig(path string) (*LensConfig, error) {
