@@ -8,9 +8,10 @@ import (
 
 type AxisConfig struct {
 	Format struct {
-		Type string `json:"type"`
-		From string `json:"from"`
-		To   string `json:"to"`
+		Type     string  `json:"type"`
+		From     string  `json:"from"`
+		To       string  `json:"to"`
+		Timezone *string `json:"timezone"`
 	} `json:"format"`
 	Key    string `json:"key"`
 	Stroke string `json:"stroke"`

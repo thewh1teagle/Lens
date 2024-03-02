@@ -1,4 +1,4 @@
-import moment from "moment";
+import moment from "moment-timezone";
 
 
 export function parseDurationString(durationString: string): moment.Duration | null {
@@ -28,3 +28,20 @@ export function parseDurationString(durationString: string): moment.Duration | n
 }
 
 
+
+export function formatLabel(config: WidgetConfig, label?: string) {
+    if (!label) {
+      return label
+    }
+    if (config.x.format?.type === 'date') {
+      if (config?.x?.format?.timezone) {
+        if (config?.x?.format?.timezone === "local") {
+          return moment(label, config.x?.format?.from).local().format(config.x?.format?.to)
+        } else {
+          return moment(label, config.x?.format?.from).tz(config?.x?.format?.timezone).format(config.x?.format?.to)
+        }
+      }
+      return moment(label).format(config.x?.format?.to)
+    }
+    return label
+}
