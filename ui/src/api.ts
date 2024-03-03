@@ -1,4 +1,5 @@
 import axios from "axios";
+import { LensConfig } from "./types";
 
 axios.interceptors.response.use((response: any) => {
     return response

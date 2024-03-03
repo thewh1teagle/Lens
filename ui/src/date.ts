@@ -1,4 +1,5 @@
 import moment from "moment-timezone";
+import { WidgetConfig } from "./types";
 
 
 export function parseDurationString(durationString: string): moment.Duration | null {

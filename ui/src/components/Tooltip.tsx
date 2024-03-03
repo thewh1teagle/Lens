@@ -1,4 +1,5 @@
 import { formatLabel } from "../date";
+import { WidgetConfig } from "../types";
 
 export const Tooltip = ({ active, payload, label, config }: {active?: boolean, payload?: any, label?: string, config: WidgetConfig}) => {
     if (active && payload && payload.length) {

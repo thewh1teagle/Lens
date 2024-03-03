@@ -1,3 +1,5 @@
+import { WidgetConfig } from "../types";
+
 interface TableProps {
   config: WidgetConfig
   data: any

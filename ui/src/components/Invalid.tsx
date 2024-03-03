@@ -1,3 +1,5 @@
+import { WidgetConfig } from "../types";
+
 export default function Invalid({props}: {props: WidgetConfig}) {
     return (
         <div className="text-error overflow-auto h-full w-full">

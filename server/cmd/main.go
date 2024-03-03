@@ -16,7 +16,7 @@ import (
 
 var (
 	configPath = kingpin.Arg("config", "Path to config dashboard JSON.").Required().String()
-	version    = "0.0.7"
+	version    = "0.0.6"
 )
 
 func main() {

@@ -3,6 +3,7 @@ import Widget from "./Widget";
 import * as api from '../api'
 import ThemeToggle from "../ThemeToggle";
 import { useHotReload } from "../hooks/useHotReload";
+import { LensConfig } from "../types";
 
 
 export default function Dashboard() {
