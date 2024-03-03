@@ -6,5 +6,9 @@
   html {
     font-family: "Proxima Nova", system-ui, sans-serif;
     scrollbar-gutter: stable;
+    box-sizing: border-box;
+  }
+  html, body, #app, #root {
+    height: 100%
   }
 }

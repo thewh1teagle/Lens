@@ -3,6 +3,7 @@ import Dashboard from "../components/Dashboard";
 import { LensConfig } from "../types";
 import * as api from "../api";
 import { useHotReload } from "../hooks/useHotReload";
+import Footer from "../components/Footer";
 
 export default function Home() {
   const [config, setConfig] = useState<LensConfig>();
@@ -22,19 +23,17 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="w-full h-full flex flex-col">
+    <div className="pt-5 pb-3 px-5 w-full h-full flex flex-col">
       {loading && (
-        <div className="p-5 mt-5 w-full h-[100vh] flex justify-center items-center">
+        <div className="p-5 mt-5 w-full flex justify-center items-center">
           <span className="loading loading-spinner text-primary loading-lg" />
         </div>
       )}
       {config && (
-        <div>
+        <>
           <Dashboard config={config} />
-          <footer className="footer footer-center mt-20 mb-3">
-            <p className="text-center opacity-50">Lens version {config?.lens_version}</p>
-          </footer>
-        </div>
+          <Footer config={config} />
+          </>
       )}
     </div>
   );
