@@ -6,7 +6,7 @@ export const fill = '#8884d8'
 export const stroke = '#82ca9d'
 export const refreshInterval = '1m'
 export const dateRangeFormat = 'YYYY-MM-DDTHH:mm:ss'
-export const defaultDateFunc = 'today'
+export const defaultDateFunc = 'last_24_hours'
 export const wsURL = import.meta.env.DEV ? 'ws://localhost:8080/api/ws' : 'ws:///api/ws'
 export const dateRangesFuncs = {
     "last_1_minutes": {
@@ -26,11 +26,11 @@ export const dateRangesFuncs = {
         getValues: () => [moment().utc().subtract(6, 'hours'), moment().utc()]
     },
     "last_24_hours": {
-        label: "Last 6 Hours",
+        label: "Last 24 Hours",
         getValues: () => [moment().utc().subtract(24, 'hours'), moment().utc()]
     },
     "last_1_day": {
-        label: "Last Day",
+        label: "Yesterday",
         getValues: () => [moment().utc().subtract(1, 'days'), moment().utc()]
     },
     "last_1_week": {
