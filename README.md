@@ -19,6 +19,9 @@ Download lens from [releases](https://github.com/thewh1teagle/Lens/releases/late
 # Config
 It's recommend to edit with an editor which works with `json-schema` for autocompletion, for instance - [vscode](https://code.visualstudio.com/download)
 
+# Examples
+Examples available in [Lens/examples](https://github.com/thewh1teagle/Lens/tree/main/examples)
+
 # Variables
 
 Queries can receive the following variables which comes from UI
