@@ -1,6 +1,6 @@
 services:
   lens:
-    image: thewh1teagle/lens
+    image: thewh1teagle/lens:latest
     restart: unless-stopped
     command: /lens examples/simple.json
     volumes:
