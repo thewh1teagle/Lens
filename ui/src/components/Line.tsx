@@ -1,6 +1,7 @@
 import { LineChart, Line as ReCharsLine, XAxis, YAxis, CartesianGrid, Tooltip as RechartTooltip, Legend, ResponsiveContainer } from 'recharts';
 import { formatLabel } from '../date';
 import { Tooltip } from './Tooltip';
+import { WidgetConfig } from '../types';
 
 
 interface LineProps {

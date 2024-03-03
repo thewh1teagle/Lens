@@ -7,6 +7,7 @@ import Invalid from "./Invalid";
 import { parseDurationString } from "../date";
 import DateRange from "./DateRange";
 import Table from "./Table";
+import { SqliteSource, URLSource, WidgetConfig } from "../types";
 
 interface WidgetProps {
   config: WidgetConfig;

@@ -1,6 +1,7 @@
 import { XAxis, YAxis, CartesianGrid, Tooltip as RechartTooltip, ResponsiveContainer, AreaChart, Area as RechartsArea } from 'recharts';
 import { Tooltip } from './Tooltip';
 import { formatLabel } from '../date';
+import { WidgetConfig } from '../types';
 
 interface LineProps {
   config: WidgetConfig
