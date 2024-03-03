@@ -25,6 +25,10 @@ export const dateRangesFuncs = {
         label: "Last 6 Hours",
         getValues: () => [moment().utc().subtract(6, 'hours'), moment().utc()]
     },
+    "last_24_hours": {
+        label: "Last 6 Hours",
+        getValues: () => [moment().utc().subtract(24, 'hours'), moment().utc()]
+    },
     "last_1_day": {
         label: "Last Day",
         getValues: () => [moment().utc().subtract(1, 'days'), moment().utc()]
