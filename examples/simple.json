@@ -15,8 +15,7 @@
             },
             "y": {
                 "key": "speed"
-            },
-            "refresh_interval": "1m"
+            }
         }
     ]
 }
