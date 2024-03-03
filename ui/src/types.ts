@@ -1,13 +1,11 @@
-import { dateRangesFuncs } from "./config"
-
 export interface AxisConfig {
     /**
     * Custom format for fields, supported currenly is date with moment format (from / to)
     */
     format?: {
             type: 'date'
-            from: string
-            to: string,
+            from?: string
+            to?: string,
             timezone?: string
     },
     /**
@@ -84,7 +82,7 @@ export interface WidgetConfig {
     /**
     * Default date range filter in UI
     */
-    date_range?: keyof typeof dateRangesFuncs
+    date_range?: "last_1_minutes" | "last_5_minutes" | "last_1_hours" | "last_6_hours" | "last_24_hours" | "yesterday" | "today" | "last_1_week" | "last_1_month" | "last_1_year" | "last_10_years"
 
     /**
     * Custom user agent for URL source
@@ -100,7 +98,13 @@ export interface Task {
 }
 
 export interface ServerConfig {
+    /**
+    * Server port
+    */
     port?: number
+    /**
+    * Server host
+    */
     host?: string
 }
 
@@ -113,6 +117,6 @@ export interface LensConfig {
     * Widgets
     */
     widgets: WidgetConfig[]
-    tasks: Task[]
+    tasks?: Task[]
     server?: ServerConfig
 }

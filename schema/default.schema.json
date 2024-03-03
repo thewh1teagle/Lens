@@ -13,6 +13,9 @@
                         "from": {
                             "type": "string"
                         },
+                        "timezone": {
+                            "type": "string"
+                        },
                         "to": {
                             "type": "string"
                         },
@@ -49,9 +52,11 @@
         "ServerConfig": {
             "properties": {
                 "host": {
+                    "description": "Server host",
                     "type": "string"
                 },
                 "port": {
+                    "description": "Server port",
                     "type": "number"
                 }
             },
@@ -115,15 +120,16 @@
                     "description": "Default date range filter in UI",
                     "enum": [
                         "last_10_years",
-                        "last_1_day",
                         "last_1_hours",
                         "last_1_minutes",
                         "last_1_month",
                         "last_1_week",
                         "last_1_year",
+                        "last_24_hours",
                         "last_5_minutes",
                         "last_6_hours",
-                        "today"
+                        "today",
+                        "yesterday"
                     ],
                     "type": "string"
                 },
