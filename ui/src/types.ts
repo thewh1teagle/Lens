@@ -100,6 +100,16 @@ export interface Task {
     verbose?: boolean
 }
 
+export interface Alert {
+    source: SqliteSource
+    condition: string
+    url: string
+    message: string
+    enable: boolean
+    check_every: string
+}
+
+
 export interface ServerConfig {
     /**
     * Server port
@@ -121,6 +131,7 @@ export interface LensConfig {
     */
     widgets: WidgetConfig[]
     tasks?: Task[]
+    alerts?: Alert[]
     server?: ServerConfig
     lens_version?: string
 }

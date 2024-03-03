@@ -28,7 +28,7 @@ func Run(config config.LensConfig) {
 	ticker := time.NewTicker(1 * time.Second)
 	defer ticker.Stop()
 	for range ticker.C {
-		for i, task := range config.Tasks {
+		for i, task := range *config.Tasks {
 			// Check if it's time to run the task
 			if time.Since(lastRunTimes[i]).Minutes() > parseDuration(task.Every).Minutes() {
 				// Execute the command

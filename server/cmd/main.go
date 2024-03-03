@@ -7,15 +7,17 @@ import (
 
 	"github.com/alecthomas/kingpin"
 	"github.com/gin-gonic/gin"
+	"github.com/thewh1teagle/lens/alert"
 	"github.com/thewh1teagle/lens/api"
 	"github.com/thewh1teagle/lens/config"
+	"github.com/thewh1teagle/lens/db"
 	hotreload "github.com/thewh1teagle/lens/hot_reload"
 	"github.com/thewh1teagle/lens/schedule"
 	"github.com/thewh1teagle/lens/ui"
 )
 
 var (
-	version   = "0.0.8"
+	version   = "0.0.9"
 	configArg = kingpin.Arg("config", "Path to config dashboard JSON.").Required().String()
 )
 
@@ -30,14 +32,22 @@ func main() {
 
 	// Setup API
 	lensConfig, err := config.ReadConfig(*configArg)
-	lensConfig.LensVersion = &version // insert current version
+	lensConfig.LensVersion = version // insert current version
 
 	if err != nil {
 		panic(err.Error())
 	}
-	api.Setup(r.Group("/api"), *lensConfig)
+	dbConnections, _ := db.CreateConnections(*lensConfig)
+	api.Run(r.Group("/api"), *lensConfig, dbConnections)
+	// Run alerts
+	if lensConfig.Alerts != nil && len(*lensConfig.Alerts) > 0 {
+		go alert.Run(*lensConfig, dbConnections)
+	}
 	// Run scheduler in background
-	go schedule.Run(*lensConfig)
+	if lensConfig.Tasks != nil && len(*lensConfig.Tasks) > 0 {
+		go schedule.Run(*lensConfig)
+	}
+
 	// Run hot reloader
 	go hotreload.SetupWatcher(*configArg)
 	// Listen and Server in 0.0.0.0:8080
@@ -45,8 +55,8 @@ func main() {
 	// Get server config
 	port := 8080
 	host := "127.0.0.1"
-	if lensConfig.ServerConfig != nil {
-		serverConfig := lensConfig.ServerConfig
+	if lensConfig.Server != nil {
+		serverConfig := lensConfig.Server
 		if serverConfig.Host != nil {
 			host = *serverConfig.Host
 		}

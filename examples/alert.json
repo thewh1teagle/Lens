@@ -1,0 +1,42 @@
+{
+    "$schema": "../schema/default.schema.json",
+    "title": "Speed Dash",
+    "widgets": [
+        {
+            "id": "2",
+            "title": "Speed2",
+            "chart_type": "line",
+            "source": {
+                "type": "sqlite",
+                "query": "SELECT speed, date FROM speedtest WHERE date > '$start_date' AND date < '$end_date' ORDER BY date",
+                "path": "app.db"
+            },
+            "x": {
+                "format": {
+                    "type": "date",
+                    "to": "HH:mm",
+                    "timezone": "Asia/Jerusalem"
+                },
+                "key": "date"
+            },
+            "y": {
+                "key": "speed"
+            },
+            "debug": true,
+            "refresh_interval": "1m"
+        }
+    ],
+    "alerts": [{
+        "source": {
+            "type": "sqlite",
+            "query": "SELECT AVG(speed) as avg FROM speedtest WHERE date >= datetime('now', '-2 hour')",
+            "path": "app.db"
+        },
+        "condition": "$avg > 50",
+        "url": "https://ntfy.sh/lens_speed_notifications",
+        "message": "Current speed is $avg!",
+        "check_every": "2s",
+        "cooldown": "30m",
+        "enable": true
+    }]
+}

@@ -3,7 +3,6 @@ package api
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -12,46 +11,9 @@ import (
 	hotreload "github.com/thewh1teagle/lens/hot_reload"
 )
 
-func Setup(api *gin.RouterGroup, lensConfig config.LensConfig) {
+func Run(api *gin.RouterGroup, lensConfig config.LensConfig, dbConnections map[string]db.DB) {
 
 	widgetMap := config.WidgetsMap(&lensConfig)
-
-	// create connections map
-	dbConnections := make(map[string]*db.SqliteDB) // assuming db.New() returns a *sql.DB
-	for id, widget := range widgetMap {
-		source, ok := widget.Source.(map[string]interface{})
-		if !ok {
-			// Source is not of the expected type. Handle this error condition as needed.
-			log.Printf("widget.Source for widget with ID %s is not of expected type. Skipping.", id)
-			continue
-		}
-
-		sourceType, ok := source["type"].(string)
-		if !ok {
-			// "type" field is not a string. Handle this error condition as needed.
-			log.Printf("widget.Source for widget with ID %s does not have a string \"type\" field. Skipping.", id)
-			continue
-		}
-
-		if sourceType == "sqlite" {
-			path, ok := source["path"].(string)
-			if !ok {
-				// "path" field is not a string. Handle this error condition as needed.
-				log.Printf("widget.Source for widget with ID %s does not have a string \"path\" field. Skipping.", id)
-				continue
-			}
-
-			db, err := db.New(path)
-			if err != nil {
-				log.Fatalf("error connecting to database: %v", err)
-			}
-			err = db.Connect()
-			if err != nil {
-				panic(err)
-			}
-			dbConnections[id] = db
-		}
-	}
 
 	api.GET("/config", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, lensConfig)
@@ -59,9 +21,11 @@ func Setup(api *gin.RouterGroup, lensConfig config.LensConfig) {
 
 	api.GET("/query", func(ctx *gin.Context) {
 		widgetID := ctx.Query("id")
+		widget := widgetMap[widgetID]
 		query := ctx.Query("q")
-
-		dbConn, ok := dbConnections[widgetID]
+		source, _ := widget.Source.(map[string]interface{})
+		path, _ := source["path"].(string)
+		dbConn, ok := dbConnections[path]
 		if !ok {
 			// The widget ID does not have a corresponding database connection
 			ctx.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("no database connection found for widget with ID %s", widgetID)})

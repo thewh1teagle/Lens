@@ -34,6 +34,7 @@ See [examples](examples)
 - Built in task scheduler (see `examples/with_tasks.json`)
 - Custom user agent for `URL` data source
 - Hot reload (Changes in JSON reflected immediately)
+- Alerts with push notifications
 
 # Data source
 - `Sqlite` Database

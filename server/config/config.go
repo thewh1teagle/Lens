@@ -8,14 +8,14 @@ import (
 
 type AxisConfig struct {
 	Format struct {
-		Type     string  `json:"type"`
-		From     string  `json:"from"`
-		To       string  `json:"to"`
-		Timezone *string `json:"timezone"`
-	} `json:"format"`
+		Type     string `json:"type"`
+		From     string `json:"from,omitempty"`
+		To       string `json:"to,omitempty"`
+		Timezone string `json:"timezone,omitempty"`
+	} `json:"format,omitempty"`
 	Key    string `json:"key"`
-	Stroke string `json:"stroke"`
-	Fill   string `json:"fill"`
+	Stroke string `json:"stroke,omitempty"`
+	Fill   string `json:"fill,omitempty"`
 }
 
 type SqliteSource struct {
@@ -41,33 +41,44 @@ type WidgetConfig struct {
 	Source          interface{} `json:"source"`
 	X               AxisConfig  `json:"x"`
 	Y               AxisConfig  `json:"y"`
-	Width           string      `json:"width"`
-	Height          string      `json:"height"`
-	Debug           bool        `json:"debug"`
-	RefreshInterval string      `json:"refresh_interval"`
-	DateRangeFormat string      `json:"date_range_format"`
-	DateRange       string      `json:"date_range"`
-	UserAgent       string      `json:"user_agent"`
+	Width           string      `json:"width,omitempty"`
+	Height          string      `json:"height,omitempty"`
+	Debug           bool        `json:"debug,omitempty"`
+	RefreshInterval string      `json:"refresh_interval,omitempty"`
+	DateRangeFormat string      `json:"date_range_format,omitempty"`
+	DateRange       string      `json:"date_range,omitempty"`
+	UserAgent       string      `json:"user_agent,omitempty"`
 }
 
 type Task struct {
 	Every   string  `json:"every"`
 	Command string  `json:"command"`
-	Cwd     *string `json:"cwd"`
-	Verbose *bool   `json:"verbose"`
+	Cwd     *string `json:"cwd,omitempty"`
+	Verbose *bool   `json:"verbose,omitempty"`
+}
+
+type Alert struct {
+	Source     interface{} `json:"source"`
+	Condition  string      `json:"condition"`
+	Url        string      `json:"url"`
+	Message    string      `json:"message"`
+	Enable     bool        `json:"enable"`
+	CheckEvery string      `json:"check_every"`
+	Cooldown   *string     `json:"cooldown,omitempty"`
 }
 
 type ServerConfig struct {
-	Port *int    `json:"port"`
-	Host *string `json:"host"`
+	Port *int    `json:"port,omitempty"`
+	Host *string `json:"host,omitempty"`
 }
 
 type LensConfig struct {
-	Title        string         `json:"title"`
-	Widgets      []WidgetConfig `json:"widgets"`
-	Tasks        []Task         `json:"tasks"`
-	ServerConfig *ServerConfig  `json:"server"`
-	LensVersion  *string        `json:"lens_version"` // inserted in main.go
+	Title       string         `json:"title"`
+	Widgets     []WidgetConfig `json:"widgets"`
+	Tasks       *[]Task        `json:"tasks,omitempty"`
+	Alerts      *[]Alert       `json:"alerts,omitempty"`
+	Server      *ServerConfig  `json:"server,omitempty"`
+	LensVersion string         `json:"lens_version,omitempty"`
 }
 
 func ReadConfig(path string) (*LensConfig, error) {

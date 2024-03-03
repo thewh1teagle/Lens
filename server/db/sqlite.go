@@ -3,7 +3,6 @@ package db
 import (
 	"database/sql"
 	"encoding/json"
-	"fmt"
 	"reflect"
 
 	_ "modernc.org/sqlite"
@@ -44,7 +43,7 @@ func (s *SqliteDB) Disconnect() error {
 }
 
 func (s *SqliteDB) Query(query string) ([]byte, error) {
-	fmt.Printf("running %v\n", query)
+	// fmt.Printf("running %v\n", query)
 	rows, err := s.db.Query(query)
 	if err != nil {
 		return nil, err
