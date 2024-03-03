@@ -1,4 +1,6 @@
-interface AxisConfig {
+import { dateRangesFuncs } from "./config"
+
+export interface AxisConfig {
     /**
     * Custom format for fields, supported currenly is date with moment format (from / to)
     */
@@ -23,23 +25,23 @@ interface AxisConfig {
     fill?: string
 }
 
-interface SqliteSource {
+export interface SqliteSource {
     type: 'sqlite'
     path: string
     query: string
 }
 
-interface URLSource {
+export interface URLSource {
     type: 'url'
     url: string
 }
 
-interface FSSource {
+export interface FSSource {
     type: 'fs'
     path: string
 }
 
-interface WidgetConfig {
+export interface WidgetConfig {
     /**
     * Unique ID you want to use
     */
@@ -82,7 +84,7 @@ interface WidgetConfig {
     /**
     * Default date range filter in UI
     */
-    date_range?: "last_1_minutes" | "last_5_minutes" | "last_1_hours" | "last_6_hours" | "last_1_day" | "last_1_week" | "last_1_month" | "last_1_year" | "last_10_years" | "today"
+    date_range?: keyof typeof dateRangesFuncs
 
     /**
     * Custom user agent for URL source
@@ -90,19 +92,19 @@ interface WidgetConfig {
     user_agent?: string
 }
 
-interface Task {
+export interface Task {
     every: string
     command: string
     cwd?: string
     verbose?: boolean
 }
 
-interface ServerConfig {
+export interface ServerConfig {
     port?: number
     host?: string
 }
 
-interface LensConfig {
+export interface LensConfig {
     /**
     * Name for dashboard (title)
     */

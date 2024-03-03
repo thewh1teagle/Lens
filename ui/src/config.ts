@@ -29,9 +29,13 @@ export const dateRangesFuncs = {
         label: "Last 24 Hours",
         getValues: () => [moment().utc().subtract(24, 'hours'), moment().utc()]
     },
-    "last_1_day": {
+    "yesterday": {
         label: "Yesterday",
         getValues: () => [moment().utc().subtract(1, 'days'), moment().utc()]
+    },
+    "today": {
+        label: "Today",
+        getValues: () => [moment().utc().startOf('day'), moment().utc().endOf('day')]
     },
     "last_1_week": {
         label: "Last Week",
@@ -48,9 +52,5 @@ export const dateRangesFuncs = {
     "last_10_years": {
         label: "Last 10 Years",
         getValues: () => [moment().utc().subtract(10, 'years').startOf('day'), moment().utc()]
-    },
-    "today": {
-        label: "Today",
-        getValues: () => [moment().utc().startOf('day'), moment().utc().endOf('day')]
     }
 };
