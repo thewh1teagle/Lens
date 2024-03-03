@@ -109,6 +109,7 @@
         "WidgetConfig": {
             "properties": {
                 "chart_type": {
+                    "description": "Widget type",
                     "enum": [
                         "area",
                         "line",

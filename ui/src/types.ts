@@ -48,6 +48,9 @@ export interface WidgetConfig {
     * Widget title
     */
     title: string
+    /**
+    * Widget type
+    */
     chart_type: "line" | "area" | "table"
 
     /**
