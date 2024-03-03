@@ -67,7 +67,7 @@ type LensConfig struct {
 	Widgets      []WidgetConfig `json:"widgets"`
 	Tasks        []Task         `json:"tasks"`
 	ServerConfig *ServerConfig  `json:"server"`
-	Version      *string        `json:version"` // inserted in main.go
+	LensVersion  *string        `json:"lens_version"` // inserted in main.go
 }
 
 func ReadConfig(path string) (*LensConfig, error) {

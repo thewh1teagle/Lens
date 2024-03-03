@@ -15,11 +15,12 @@ import (
 )
 
 var (
-	configPath = kingpin.Arg("config", "Path to config dashboard JSON.").Required().String()
-	version    = "0.0.7"
+	version   = "0.0.7"
+	configArg = kingpin.Arg("config", "Path to config dashboard JSON.").Required().String()
 )
 
 func main() {
+	kingpin.Version(version)
 	kingpin.Parse()
 	gin.SetMode(gin.ReleaseMode) // hide default debug messages
 	r := gin.Default()
@@ -28,8 +29,8 @@ func main() {
 	ui.ServeUI(r)
 
 	// Setup API
-	lensConfig, err := config.ReadConfig(*configPath)
-	lensConfig.Version = &version // insert current version
+	lensConfig, err := config.ReadConfig(*configArg)
+	lensConfig.LensVersion = &version // insert current version
 
 	if err != nil {
 		panic(err.Error())
@@ -38,7 +39,7 @@ func main() {
 	// Run scheduler in background
 	go schedule.Run(*lensConfig)
 	// Run hot reloader
-	go hotreload.SetupWatcher(*configPath)
+	go hotreload.SetupWatcher(*configArg)
 	// Listen and Server in 0.0.0.0:8080
 
 	// Get server config

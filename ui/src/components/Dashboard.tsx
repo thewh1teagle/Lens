@@ -1,36 +1,13 @@
-import { useEffect, useState } from "react";
 import Widget from "./Widget";
-import * as api from '../api'
 import ThemeToggle from "../ThemeToggle";
-import { useHotReload } from "../hooks/useHotReload";
 import { LensConfig } from "../types";
 
 
-export default function Dashboard() {
-  const [config, setConfig] = useState<LensConfig>()
-  const [loading, setLoading] = useState(true)
+interface DashboardProps {
+  config: LensConfig
+}
 
-  async function fetchConfig() {
-    const config = await api.config()
-    setConfig(config)
-    document.title = config.title
-    setLoading(false)
-  }
-
-  useHotReload({fetchConfig})
-
-  useEffect(() => {
-    fetchConfig()
-  }, [])
-
-  if (loading) {
-    return (
-      <div className="p-5 mt-5 w-full h-[100vh] flex justify-center items-center">
-        <span className="loading loading-spinner text-primary loading-lg" />
-      </div>
-    )
-  }
-
+export default function Dashboard({config}: DashboardProps) {
 
   return (
     <div className="p-5 mt-5">

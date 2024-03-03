@@ -122,4 +122,5 @@ export interface LensConfig {
     widgets: WidgetConfig[]
     tasks?: Task[]
     server?: ServerConfig
+    lens_version?: string
 }
