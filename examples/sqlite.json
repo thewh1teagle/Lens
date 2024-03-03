@@ -20,9 +20,7 @@
                 "key": "date"
             },
             "y": {
-                "key": "speed",
-                "stroke": "#82ca9d",
-                "fill": "#8884d8"
+                "key": "speed"
             },
             "debug": true,
             "refresh_interval": "1m"

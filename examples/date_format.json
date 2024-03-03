@@ -12,8 +12,6 @@
             },
             "x": {
                 "key": "date",
-                "stroke": "#82ca9d",
-                "fill": "#8884d8",
                 "format": {
                     "type": "date",
                     "from": "YYYY-MM-DD HH:mm:ss",

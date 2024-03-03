@@ -14,18 +14,14 @@
             "x": {
                 "format": {
                     "type": "date",
-                    "from": "YYYY-MM-DD HH:mm:ss",
                     "to": "HH:mm"
                 },
                 "key": "date"
             },
             "y": {
-                "key": "speed",
-                "stroke": "#82ca9d",
-                "fill": "#8884d8"
+                "key": "speed"
             },
-            "debug": true,
-            "refresh_interval": "1m"
+            "debug": true
         },
         {
             "id": "2",
@@ -45,9 +41,7 @@
                 "key": "date"
             },
             "y": {
-                "key": "speed",
-                "stroke": "#82ca9d",
-                "fill": "#8884d8"
+                "key": "speed"
             },
             "debug": true,
             "refresh_interval": "1m",
@@ -70,9 +64,7 @@
                 "key": "date"
             },
             "y": {
-                "key": "speed",
-                "stroke": "#82ca9d",
-                "fill": "#8884d8"
+                "key": "speed"
             },
             "debug": true,
             "refresh_interval": "1m",
