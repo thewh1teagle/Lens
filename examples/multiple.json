@@ -51,7 +51,7 @@
             },
             "debug": true,
             "refresh_interval": "1m",
-            "date_range": "last_1_year"
+            "date_range": "last_24_hours"
         },
         {
             "id": "2",
@@ -76,7 +76,7 @@
             },
             "debug": true,
             "refresh_interval": "1m",
-            "date_range": "last_1_year"
+            "date_range": "last_24_hours"
         },
         {
             "id": "cool_table3",
