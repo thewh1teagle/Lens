@@ -89,6 +89,7 @@ docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t thewh1tea
 
 ### One linear
 ```console
+(cd ui && npm run build)
 docker buildx build --push \
 --platform linux/amd64,linux/arm64 \
 --tag thewh1teagle/lens:latest .
