@@ -68,5 +68,7 @@ services:
 
 # Dates
 Dates are very important in this app. 
-Expected dates for UI/Server are UTC dates with the default SQLite format %Y-%m-%d %H:%M:%S. 
+
+Expected dates for UI/Server are UTC dates with the default SQLite format `%Y-%m-%d %H:%M:%S`. 
+
 This way, we can leverage the power of built-in functions of SQLite.
