@@ -1,14 +1,3 @@
-# Build UI, no need special platform
-# FROM --platform=linux/amd64 node:alpine as UI
-
-# RUN mkdir -p /app/server/ui
-# COPY ui /app/ui
-
-# WORKDIR /app/ui
-
-# RUN npm install
-# RUN npm run build
-
 # Build Server
 FROM golang:latest as BUILD
 
@@ -20,7 +9,6 @@ WORKDIR /app/server
 RUN go mod download
 
 COPY server/ /app/server
-# COPY --from=UI /app/server/ui/public /app/server/ui/public
 
 RUN CGO_ENABLED=0 GOOS=linux go build -tags release -o /lens cmd/main.go
 
