@@ -65,3 +65,8 @@ services:
       - LENS_HOST=0.0.0.0
       - LENS_PORT=8080
 ```
+
+# Dates
+Dates are very important in this app. 
+Expected dates for UI/Server are UTC dates with the default SQLite format %Y-%m-%d %H:%M:%S. 
+This way, we can leverage the power of built-in functions of SQLite.

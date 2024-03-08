@@ -23,8 +23,7 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS speedtest (
 
 def insert_data(speed, date):
     # Convert date to UTC string with "Z" suffix
-    utc_date_str = date.isoformat() + "z"
-    cursor.execute("INSERT INTO speedtest (speed, date) VALUES (?, ?)", (speed, utc_date_str))
+    cursor.execute("INSERT INTO speedtest (speed, date) VALUES (?, ?)", (speed, date))
 
 def random_speed():
     chance = random.randint(1, 100)
