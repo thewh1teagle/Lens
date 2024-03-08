@@ -17,7 +17,7 @@ import (
 )
 
 var (
-	version   = "0.0.9"
+	version   = "0.1.0"
 	configArg = kingpin.Arg("config", "Path to config dashboard JSON.").Required().String()
 )
 
